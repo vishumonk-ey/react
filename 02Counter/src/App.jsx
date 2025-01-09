@@ -14,8 +14,8 @@ function App() {
       setCounter(++counter); // dont directly increment the state value as counter's local value is updated but react hasnt updated the state yet
       setCounter(counter*2);
       setCounter(counter*3);
-//---> react waits for all the state changes to happen and when all the state changes happen it updates the state and re-renders the component
-// react keeps the state variable's value fixed throught the one event handler so i need not worry about whether the value has changed or not.
+// react waits for all the code to run in an event listener before re-rendering.--> this is known as batching.
+      // react keeps the state variable's value fixed throught the one event handler so i need not worry about whether the value has changed or not.
     }
     // counter variable is being increased but there is issue in UI  updation , here comes the role of hooks
   };
