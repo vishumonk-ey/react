@@ -1,0 +1,3 @@
+- useCallback hook creates the function again only if something from the dependency array is changed.if we dont use it then the component will re-render every time when the state or props will change consequently creating a new function and due to which the components which are using the function or dependent on them will re-render.----> it doesnt executes the function only returns the function definition.
+- useRef hook gives us reference of an element and then we can manipulate it
+- till now got to know that useEffect hook executes the callback function in the initial render and for ahead executions it will run when any of the dependency will change.
