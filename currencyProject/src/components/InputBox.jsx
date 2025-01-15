@@ -18,7 +18,8 @@ function InputBox({
         <input
           type="number"
           className="outline-none cursor-pointer "
-          value={amount}
+          defaultValue={amount}
+        //   if i am using value then it is not letting me backspace the 0 which is the initial state , but when i am using the  defaultValue then i can backspace it
           disabled={amountDisable}
           onChange={(e) => {
             onAmountChange && onAmountChange(Number(e.target.value));
@@ -33,7 +34,7 @@ function InputBox({
           value={selectedCurrency}
           disabled={currencyDisable}
           onChange={(e) => {
-            onCurrencyChange && onCurrencyChange(e.target.val);
+            onCurrencyChange && onCurrencyChange(e.target.value);
           }}
         >
           {currencyOptions.map((crncy) => {
