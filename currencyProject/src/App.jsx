@@ -23,11 +23,11 @@ function App() {
     setConvertedAmount(amount);
   };
   const convert = () => {
-    const convertedVal=(amount * Number(currencyInfo[to]))   
-    setConvertedAmount(convertedVal);
-    console.log(convertedVal);
+    const convertedVal=(amount * Number(currencyInfo[to]))  
+    console.log("Converted Amount:", convertedVal); 
+    setConvertedAmount(convertedVal)
     setConvertedAmount((prev)=>{
-      console.log("state",prev)
+      console.log("converted amount state",prev)
     })
   };
   return (
@@ -42,6 +42,7 @@ function App() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              convert()
             }}
           >
             <InputBox
@@ -71,7 +72,7 @@ function App() {
             </div>
             <InputBox 
                 label="To"
-                amount={convertedAmount}
+                amount={convertedAmount }
                 currencyOptions={options}
                 selectedCurrency={to}
                 onCurrencyChange={
@@ -85,7 +86,6 @@ function App() {
               <button
                 type="submit"
                 className="bg-blue-600 px-6 py-2 rounded-lg text-lg text-white"
-                onClick={convert}
               >
                 Convert
               </button>

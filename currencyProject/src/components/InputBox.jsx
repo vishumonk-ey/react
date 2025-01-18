@@ -11,6 +11,8 @@ function InputBox({
   amountDisable = false,
   currencyDisable = false,
 }) {
+
+  console.log("InputBox Amount Prop:", amount);
   return (
     <div className={`${extraClass} input-box bg-white rounded-lg p-3 flex`}>
       <div className="w-1/2">
@@ -18,7 +20,7 @@ function InputBox({
         <input
           type="number"
           className="outline-none cursor-pointer "
-          defaultValue={amount}
+          value={amount ?? 0}
         //   if i am using value then it is not letting me backspace the 0 which is the initial state , but when i am using the  defaultValue then i can backspace it
           disabled={amountDisable}
           onChange={(e) => {
