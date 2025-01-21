@@ -3,3 +3,4 @@
 - sticky class for creating a sticky like feature jisme nav bar atka rehta hai thodi der scroll krne tk fir uske baad hat jaata hai...--->
 happens it stays fixed till the parent element is on the screen , when the parent element goes out of screen the sticky element also goes out 
 - Layout vaala file is being used as base and when we use Outlet then everything else will remain same except outlet
+- giving us feel of Multi page application even though it is a single page application.on the specific button click or URL , specific components are shown.
