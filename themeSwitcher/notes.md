@@ -1,0 +1,2 @@
+- context provider is giving me access of the context , all the things which are wrapped by the context provider can have the access of the context
+- in context provider we have to write a value prop which tells us which values are accessible to the children components
