@@ -8,3 +8,10 @@
 - NavLink / Link me "to" me vhi likhna hai jo humne route me path me diya hai uppercase and smallcase difference will work
 - loader kya karta haii--- just when you hover on the component it will start the fetching and store it in cache. being more optimized , even though the component isnt rendered yet.
 - even though it is returning the promise but the react router's loader mechanism resloves the returned promise interally and sends the resolved value or simply i can return the json
+
+- React -> core library , provides features like using components,provides hooks , virtual DOM and reconcilliation . 
+REact dom -> platform specific library used for web apps 
+react Native ->
+
+- Redux -> core library
+react-redux - specific library
