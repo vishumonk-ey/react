@@ -1,24 +1,45 @@
-import { useEffect, useState } from 'react'
+import { Component, useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import TodoForm from './components/TodoForm'
+import TodoItem from './components/TodoItem'
 import { TodoContextProvider } from './Context' 
 function App() {
   const [todos,setTodos]=useState([])
   const addTodo =(todo)=>{
-    setTodos((prev)=>[...prev,{
-      id: todo,
-      todo : todo, //might create error and confusion ki konsa value hai
-      completed : false,
-    }
+    setTodos((prev)=>[...prev,todo
     ])
   }
   const updateTodo = (todo,id)=>{
-
+    setTodos((prevTodos)=>(
+      // let arr=[]
+      // for (const eachTodo of prevTodos) {
+      //   if(eachTodo.id===id){
+      //       arr.push(todo)
+      //   }else{
+      //       arr.push(eachTodo)
+      //   }
+      // }
+      // return arr
+       prevTodos.map((eachTodo)=>(
+        eachTodo.id===id ? todo : eachTodo
+      ))
+  ))
   }
-  const deleteTodo = () =>{}
-  const toggleComplete = () =>{
-
+  const deleteTodo = (id) =>{
+      setTodos((prevTodos) =>(
+          prevTodos.filter((eachTodo)=>(
+            eachTodo.id!=id
+          ))
+      ))
+  }
+  const toggleComplete = (id) =>{
+     setTodos((prevTodos)=>(
+      prevTodos.map((eachTodo)=>(
+        eachTodo.id===id ? eachTodo.completed = !eachTodo.completed : eachTodo
+      ))
+     ))
   }
   useEffect(()=>{
     const savedTodos = JSON.parse(localStorage.getItem("todos"))
@@ -37,9 +58,15 @@ function App() {
                     <h1 className="text-2xl font-bold text-center mb-8 mt-2">Manage Your Todos</h1>
                     <div className="mb-4">
                         {/* Todo form goes here */} 
+                        <TodoForm/>
                     </div>
                     <div className="flex flex-wrap gap-y-3">
                         {/*Loop and Add TodoItem here */}
+                        {todos.map((eachTodo)=>(
+                          <div className='w-full' key={eachTodo.id}>
+                            <TodoItem todo={eachTodo}/>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

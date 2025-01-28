@@ -1,3 +1,3 @@
-import { todoContext } from "./TodoContext";
+// import { todoContext } from "./TodoContext";
 
-export {TodoContext,TodoContextProvider,useTodo} from todoContext
+export {todoContext,TodoContextProvider,useTodo} from "./TodoContext"

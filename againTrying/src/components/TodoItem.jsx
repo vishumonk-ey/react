@@ -1,9 +1,23 @@
 import React from "react";
 import { useTodo } from "../Context";
+import { useState } from "react";
 function TodoItem({ todo }) {
     // directly aise kar diya kruki loop laga ke karunga and har ek iteration me single todo dedunga as a prop jisko yahapr destructure krliya hai 
-    const {updateTodo,deleteTodo,toggleCompleted}=useTodo()
-    const []=useState('true')
+    const {updateTodo,deleteTodo,toggleComplete}=useTodo()
+    const [isTodoEditable,setIsTodoEditable]=useState(false)
+    const [todoMsg,setTodoMsg] =useState(todo.todo)
+    const editTodo = () =>{
+        updateTodo({
+            ...todo,
+            todo:todoMsg,
+        },todo.id)
+        setIsTodoEditable(false)
+    }
+    window.addEventListener('keydown',(e)=>{
+        if (e.key=="Enter" && isTodoEditable){
+            editTodo()
+        }
+    })
     return (
         <div
             className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300  text-black ${
@@ -14,7 +28,10 @@ function TodoItem({ todo }) {
                 type="checkbox"
                 className="cursor-pointer"
                 checked={todo.completed}
-                onChange={toggleCompleted}
+                onChange={()=>{
+                    toggleComplete(todo.id)
+                    // setIsTodoEditable((prev)=> !prev )
+                }}
             />
             <input
                 type="text"
@@ -34,6 +51,7 @@ function TodoItem({ todo }) {
                     if (isTodoEditable) {
                         editTodo();
                     } else setIsTodoEditable((prev) => !prev);
+                    // here , isTodoEditable is getting the value true for the first time.
                 }}
                 disabled={todo.completed}
             >
