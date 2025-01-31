@@ -24,7 +24,7 @@ function TodoItem({ todo }) {
                 type="checkbox"
                 className="cursor-pointer"
                 checked={todo.completed}
-                onChange={()=>dispatch(toggle(todo.id))}
+                onChange={(e)=>dispatch(toggle(todo.id))}
             />
             <input
                 type="text"

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector ,useDispatch } from "react-redux";
 import TodoItem from "./TodoItem";
-function Todo (){
+export default function TodoList (){
     const todos = useSelector((state)=> state.todos)
     return(
         <div>
