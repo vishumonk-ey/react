@@ -1,13 +1,14 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
-  todos: [
-    {
-      id: 1,
-      Text: "learning react",
-      completed: false,
-    },
-  ],
+//   todos: [
+//     // {
+//     //   id: 1,
+//     //   Text: "learning react",
+//     //   completed: false,
+//     // },
+//   ],
+    todos : JSON.parse(localStorage.getItem("todos")) || []
 };
 
 const todoSlice = createSlice({
@@ -37,7 +38,7 @@ const todoSlice = createSlice({
             ))
         },
         toggle: (state , action) =>{
-            const id = action.payload.id
+            const id = action.payload
             state.todos=state.todos.map((eachTodo) => (
                 eachTodo.id === id ? {...eachTodo , completed : !(eachTodo.completed) } : eachTodo
             ))

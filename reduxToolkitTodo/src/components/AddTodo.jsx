@@ -4,8 +4,9 @@ import { addTodo } from "../features/todo/todoSlice";
 function TodoForm() {
     const [input,setInput] = useState("")
     const dispatch = useDispatch()
-    function submitHandler(e){
+    const submitHandler= (e)=>{
         e.preventDefault()
+        if(input.trim().length===0) return
         dispatch(addTodo(input))
         setInput('')
     }

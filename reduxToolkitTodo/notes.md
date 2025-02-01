@@ -3,3 +3,5 @@
 
 - sabse phle store create kiya fir slice create  kiya jiske andar initial state diya jayega , name diya jayega and reducers ka list diya jayega.. reducers are nothing but methods . 
 fir vo reducers ko export krke hum apne store me bhi access denge , store khaali reducers me diye gaye functions se hi update hoga .
+
+- useSelector me callback dena padta hai which will bring data from the store
