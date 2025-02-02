@@ -1,0 +1,3 @@
+- when creating environment variable , we should have it in root directory ..
+- database is like a library building , collections are like each section in the building which consists same type of data for eg. "History" "biology" sections in the lib building.
+- document is the book itself , attributes are the properties of the book  which we keep track of , indexes are something which makes our searching easier (dont know exactly ? )
