@@ -7,7 +7,8 @@ export class AuthService {
   //.setProject(config.appwriteProjectId) // instead of directly doing here we will do it inside the constructor why?
   account; // instead of declaring it here i could've declared it inside the constructor.
   constructor() {
-    this.client.setProject(config.appwriteProjectId);
+    this.client.setProject(config.appwriteProjectId)
+      .setEndpoint(config.appwriteUrl);
     this.account = new Account(this.client);
   }
   async createAccount({ email, password, name }) {
@@ -49,6 +50,7 @@ export class AuthService {
         return null;
       }
     } catch (error) {
+      console.log("AuthService::getuser error",error);
       throw error;
     }
   }
