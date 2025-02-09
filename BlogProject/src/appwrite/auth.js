@@ -30,7 +30,7 @@ export class AuthService {
       throw error;
     }
   }
-  async logIn({ email, password }) {
+  async logIn({ email , password }) {
     try {
       const loggedInUser = await this.account.createEmailPasswordSession(
         email,
