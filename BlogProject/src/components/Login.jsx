@@ -54,6 +54,7 @@ function Login() {
         <form
           onSubmit={handleSubmit(login)} // handleSubmit is my method so it will execute while rendering or declaring(whats the correct term to say) right?
           // and also while submitting i wwould have to prevent default right?
+         //   handleSubmit is basically like a wrapper which will catch the event and prevent default and then do all the validation and if all things are validated then login function is called with formData 
         >
           <div className="space-y-4">
             <div className="flex flex-wrap items-center space-x-4">
@@ -70,8 +71,21 @@ function Login() {
                   pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                 })}
               />
-              {errors.email && <p className="text-sm">Please enter an appropriate email.</p>} 
+              {errors.email && <p className="text-sm text-red-500">Please enter an appropriate email.</p>} 
               {/* whenever there is an error in email , i want the exact error like whether it is empty or pattern isn't matching. how do i achieve this? */}
+            </div>
+            <div className="flex flex-wrap items-center space-x-4">
+                <Input 
+                    label="Password"
+                    placeholder = "Enter Your Password..."
+                    type = "password"
+                    {...register("password" , {
+                            required : true ,
+                            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/,
+                    })}
+                />
+                {errors.password && 
+                <p className="text-sm text-red-500"> Please enter an appropriate password.</p>}
             </div>
           </div>
         </form>
