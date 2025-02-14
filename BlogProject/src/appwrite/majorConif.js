@@ -43,6 +43,7 @@ export default class DatabaseService{
                     status
                 }
             )
+            return updatedPost
         } catch (error) {
             console.log("Appwrite :: updatePost",error);
         }
@@ -97,7 +98,7 @@ async uploadFile(file){
             ID.unique(),
             file
         ) 
-        return true
+        return result
     } catch (error) {
         console.log("uploadFIle" , error)
     }
@@ -120,4 +121,4 @@ getFilePreview(fileId){
     return result
 }
 }
-export const databaseService = new DatabaseService()
+export const appwriteService = new DatabaseService()
