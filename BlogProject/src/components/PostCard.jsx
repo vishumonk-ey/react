@@ -7,7 +7,7 @@ function PostCard({
     featuredImage
 }) {
   return (
-    <Link to = {`/post/${id}`}>
+    <Link to = {`/post/${$id}`}>
        <div className='w-full bg-gray-100 rounded-xl p-4'>
             <div className='w-full mb-4'>
                 <img 

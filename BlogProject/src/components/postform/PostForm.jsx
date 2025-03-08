@@ -44,7 +44,7 @@ function PostForm({ post }) {
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
-          // why we are overwriting userId here?
+          // why we are overwriting userId here? ? ?
         });
       }
     }
