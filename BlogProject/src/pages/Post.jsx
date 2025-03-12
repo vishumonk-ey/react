@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { appwriteService } from "../appwrite/majorConif";
 import { Buttons } from "../components/Buttons";
-import { Container } from "../components/container";
+import { Container } from "../components/container/Container";
 import parse from "html-react-parser";
 function Post() {
   let [post, setPost] = useState(null);

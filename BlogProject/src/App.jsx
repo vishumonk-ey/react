@@ -36,10 +36,10 @@ function App() {
       return (
         <div className='min-h-screen flex flex-wrap content-between'>
           <div className='w-full block'>
-            <h1>heyyy</h1>
+            {/* <h1>heyyy</h1> */}
             <Header />
             <main>
-              {/* <Outlet/> */}
+              <Outlet/>
             </main>
             <Footer/>
           </div>
