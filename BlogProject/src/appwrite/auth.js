@@ -51,7 +51,7 @@ export class AuthService {
       }
     } catch (error) {
       console.log("AuthService::getuser error",error);
-      throw error;
+      // throw error;
     }
   }
   async logOut (){

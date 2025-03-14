@@ -1,15 +1,17 @@
 import { config } from "../assets/conf/config";
-import { Client, ID ,Databases,Query} from "appwrite";
+import { Client, ID ,Databases,Query,Storage} from "appwrite";
 export default class DatabaseService{
     client = new Client()
     databases;
-    bucket ;
+     bucket ;
+    //  even if i dont declare databus and bucket here , i wont get any error?
+    // why are we declaring first here and then database and bucket inside constructor and also why not set endpoint initially here or everything couldve been inside constructor
     constructor(){
         this.client
             .setEndpoint(config.appwriteUrl)
             .setProject(config.appwriteProjectId)
-        databases = new Databases(this.client)
-        bucket = new Storage(this.client)
+        this.databases = new Databases(this.client)
+        this.bucket = new Storage(this.client)
     }
     async createPost({title , content , featureImage ,status , userId ,slug}){
         try {

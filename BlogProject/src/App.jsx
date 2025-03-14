@@ -39,7 +39,7 @@ function App() {
             {/* <h1>heyyy</h1> */}
             <Header />
             <main>
-              <Outlet/>
+            <Outlet/>
             </main>
             <Footer/>
           </div>

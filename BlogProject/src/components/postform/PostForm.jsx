@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 import RTE from "../RTE";
-import {Input} from "../Input"
-import {Select} from "../Select"
-import {Buttons as Button} from "../Buttons"
+import Input from "../Input"
+import Select from "../Select"
+import  Button from "../Buttons"
 import { useForm } from "react-hook-form";
 import appwriteService from "../../appwrite/majorConif";
 import { useSelector } from "react-redux";

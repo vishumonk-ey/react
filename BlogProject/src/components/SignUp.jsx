@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import authService from "../appwrite/auth";
 import { login as storeLogin } from "../store/AuthSlice";
-import useForm from "react-hook-form";
+import { useForm }from "react-hook-form";
 import Input from "./Input";
 import Logo from "./Logo";
+import Buttons from "./Buttons";
 import { useDispatch } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 function SignUp() {
@@ -11,6 +12,7 @@ function SignUp() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const signup = async (data) => {
+    console.log("called");
     setError("");
     try {
       const newUser = await authService.createAccount(data);
@@ -33,7 +35,7 @@ function SignUp() {
   } = useForm();
   return (
     <div className="flex items-center justify-center">
-      <div className="mx-auto w-full  max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
+      <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
         <div className="mb-2 flex justify-center ">
           <span className="inline-block w-full max-w-[100px]">
             <Logo width="100%" />
@@ -53,9 +55,9 @@ function SignUp() {
           </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-      </div>
-      <form>
-        <div className="space-y-4">
+
+        <form onSubmit={handleSubmit(signup)}>
+        <div className="space-y-4  ">
           <div className="space-x-2 flex flex-wrap">
             <Input
               label="Name :"
@@ -102,9 +104,12 @@ function SignUp() {
               </p>
             )}
           </div>
-          <button type="submit" className="px-4 py-1.5 bg-green-600">Sign Up</button>
+              <Buttons className="w-full">
+                Create Account
+              </Buttons>
         </div>
       </form>
+      </div>
     </div>
   );
 }
