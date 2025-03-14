@@ -12,20 +12,22 @@ function SignUp() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const signup = async (data) => {
-    console.log("called");
+    console.log("Signup function called with data:", data);
     setError("");
     try {
       const newUser = await authService.createAccount(data);
       console.log("when signing up , this is being returned !", newUser);
       if (newUser) {
         const newUserData = await authService.getUser();
+        console.log("when signing up , this is being returned !", newUserData); 
         if (newUserData) {
           dispatch(storeLogin(newUserData));
         }
         navigate("/");
       }
     } catch (error) {
-      setError(error);
+      console.log(error);
+      setError(error.message);
     }
   };
   const {
@@ -94,24 +96,25 @@ function SignUp() {
               placeholder="Create Password..."
               {...register("password", {
                 required: true,
-                pattern:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/,
+                // pattern:
               })}
             />
-            {errors.email && (
+            {errors.password && (
               <p className="text-sm text-red-500">
                 Create an appropriate Password!
               </p>
             )}
           </div>
-              <Buttons className="w-full">
+              <Buttons className="w-full" type="submit">
                 Create Account
               </Buttons>
+              {/* <button type="submit" onClick={handleSubmit(signup)}>Sign Up</button> */}
         </div>
       </form>
       </div>
     </div>
   );
 }
+
 
 export default SignUp;

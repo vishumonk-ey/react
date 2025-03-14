@@ -52,10 +52,12 @@ function PostForm({ post }) {
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string") {
       const slug = value
-        .trim()
-        .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
-        .replace(/\s/g, "-");
+  .trim()
+  .toLowerCase()
+  .replace(/[^\w\s-]/g, "") // Remove special characters except spaces and hyphens
+  .replace(/[\s_]+/g, "-")  // Replace spaces and underscores with hyphens
+  .replace(/^-+|-+$/g, ""); // Remove leading and trailing hyphens
+
       return slug;
     }
     return "";

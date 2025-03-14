@@ -4,7 +4,7 @@ import PostCard from "../components/PostCard";
 import Container from "../components/container/Container";
 function Home() {
   let [posts, setPosts] = useState([]);
-  appwriteService.getPosts().then((posts) => setPosts(posts.document));
+  appwriteService.getPosts().then((posts) => setPosts(posts.documents)).catch((err) => console.log("error in getting posts", err));
   if (posts.length === 0) {
     return (
       <div className="w-full py-8 mt-4 text-center text-2xl">

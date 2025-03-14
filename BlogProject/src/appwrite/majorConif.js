@@ -90,6 +90,7 @@ export default class DatabaseService{
             return result
         } catch (error) {
             console.log("Appwrite :: getPosts",error);
+            throw error
         }
     }
 // for file uploading.... why stored file in buckets? because these are large files and can bloat up my database , slows down my queries , buckets are cheaper and also optimized for handling large files

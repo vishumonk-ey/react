@@ -26,12 +26,12 @@ export default function Header() {
     },
     {
       name: "All Posts",
-      slug: "/allposts",
+      slug: "/all-posts",
       active: authStatus,
     },
     {
       name: "Add Posts",
-      slug: "/addposts",
+      slug: "/add-posts",
       active: authStatus,
     },
   ];
@@ -45,12 +45,13 @@ export default function Header() {
             </Link>
           </div>
 
-          <ul className="flex items-center ml-auto">
+          <ul className="flex ml-auto">
                 {navItem.map(
                 (eachItem) => (
                     eachItem.active && (
                     <li key={eachItem.name}>
-                        <Buttons
+                        <Buttons 
+                        className="inline-block ml-2 px-5"
                         onClick={() => {
                             navigate(eachItem.slug);
                         }}

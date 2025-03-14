@@ -1,4 +1,5 @@
 import React from 'react'
+import { config } from '../assets/conf/config'
 import { useState } from 'react'
 import {Controller,useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
@@ -20,6 +21,7 @@ export default function RTE({
 
             <Editor
         initialValue={defaultValue}
+        apiKey={config.tinymceAPIkey}
         init={{
             initialValue: defaultValue,
             height: 500,

@@ -4,6 +4,8 @@ import { login as storeLogin } from "../store/AuthSlice";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import Input from './Input'
+import Buttons from './Buttons'
 function Login() {
   const {
     register,
@@ -34,7 +36,7 @@ function Login() {
       <div className="mx-auto w-full  max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
         <div className="mb-2 flex justify-center ">
           <span className="inline-block w-full max-w-[100px]">
-            <Logo width="100%" />
+            Logo
           </span>
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight">
@@ -81,12 +83,13 @@ function Login() {
                     type = "password"
                     {...register("password" , {
                             required : true ,
-                            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/,
+                            // pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/,
                     })}
                 />
                 {errors.password && 
                 <p className="text-sm text-red-500"> Please enter an appropriate password.</p>}
             </div>
+            <Buttons className="w-full">Log In</Buttons>
           </div>
         </form>
       </div>
