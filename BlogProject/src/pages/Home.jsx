@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from "react";
 import appwriteService from "../appwrite/majorConif";
 import PostCard from "../components/PostCard";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Container from "../components/container/Container";
 import { fetchPosts } from "../store/PostSlice";
 function Home() {
   let [posts, setPosts] = useState([]);
   const [req, setreq] = useState(false);
-  const dispatch = useDispatch()
-  // appwriteService
-  //   .getPosts()
-  //   .then((posts) => {
-  //     setPosts(posts.documents);
-  //   })
-  //   .catch((err) => console.log("error in getting posts", err))
-  //   .finally(()=>setreq(true))
+  const dispatch = useDispatch();
+
+  const postsLoaded = useSelector((state) => state.post.postsLoaded);
   useEffect(() => {
-    const postsLoaded = useSelector((state) => state.post.postsLoaded);
-    if (postsLoaded) {
-      const allPosts = useSelector((state) => state.post.posts);
-      setPosts(allPosts)
-    }else{
-        dispatch(fetchPosts())
-        const allPosts = useSelector((state) => state.post.posts);
-        setPosts(allPosts)
+    if (!postsLoaded) {
+      appwriteService
+        .getPosts()
+        .then((posts) => {
+          dispatch(fetchPosts(posts.documents))
+        })
+        .catch((err) => console.log("error in getting posts", err))
+        .finally(() => setreq(true));
+      // dispatch(fetchPosts());
     }
-    setreq(true)
+  }, []);
+  const allPosts = useSelector((state) => state.post.posts);
+  useEffect(() => {
+    // console.log(allPosts);
+    setPosts(allPosts);
   }, []);
   if (req === false && posts.length === 0) {
     return (
