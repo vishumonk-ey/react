@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect , useState} from "react";
+import { useNavigate, useParams ,Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { appwriteService } from "../appwrite/majorConif";
+import  appwriteService  from "../appwrite/majorConif";
 import  Buttons  from "../components/Buttons";
 import  Container  from "../components/container/Container";
 import parse from "html-react-parser";
@@ -9,7 +9,7 @@ function Post() {
   let [post, setPost] = useState(null);
   let { slug } = useParams();
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.auth.userData);
+  const userData = useSelector((state) => state.userData);
   useEffect(() => {
     if (slug) {
       appwriteService.getPost(slug).then((post) => {
@@ -34,7 +34,7 @@ function Post() {
   const deletePost = () => {
     appwriteService.deletePost(post.$id).then((status) => {
       if (status) {
-        appwriteService.deleteFile(post.featureImage);
+        appwriteService.deleteFile(post.featuredImage);
         navigate("/");
       }
     });
@@ -44,17 +44,17 @@ function Post() {
       <Container>
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
           <img 
-            src={appwriteService.getFilePreview(post.featureImage)}  
+            src={appwriteService.getFilePreview(post.featuredImage)}  
             // how file will load ? this should give error !
              alt={post.title}
              className="rounded-xl"
           />
           {isAuthor && (
             <div className="absolute right-6 top-6">
-                <Link to= {`edit-post/${post.$id}`}>
-                    <Button className="bg-green-500 hover:bg-green-300 ">
+                <Link to= {`/edit-post/${post.$id}`}>
+                    <Buttons className="bg-green-500 hover:bg-green-300 ">
                         Edit
-                    </Button>
+                    </Buttons>
                 </Link>
                 <Buttons className="bg-red-500 hover:bg-red-300" onClick={deletePost}>
                     Delete

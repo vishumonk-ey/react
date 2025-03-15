@@ -1,6 +1,6 @@
 import { config } from "../assets/conf/config";
 import { Client, ID ,Databases,Query,Storage} from "appwrite";
-export default class DatabaseService{
+export class DatabaseService{
     client = new Client()
     databases;
      bucket ;
@@ -13,7 +13,7 @@ export default class DatabaseService{
         this.databases = new Databases(this.client)
         this.bucket = new Storage(this.client)
     }
-    async createPost({title , content , featureImage ,status , userId ,slug}){
+    async createPost({title , content , featuredImage ,status , userId ,slug}){
         try {
             const post = await this.databases.createDocument(
                 config.appwriteDatabaseId ,
@@ -22,11 +22,12 @@ export default class DatabaseService{
                 {
                     title : title,
                     content : content ,
-                    featureImage ,
+                    featuredImage ,
                     status ,
                     userId,
                 }
             )
+            return post
         } catch (error) {
             console.log("Appwrite :: createPost",error);
             
@@ -124,4 +125,5 @@ getFilePreview(fileId){
     return result
 }
 }
-export const appwriteService = new DatabaseService()
+const appwriteService = new DatabaseService()
+export default appwriteService

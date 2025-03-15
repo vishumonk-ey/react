@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import databaseService from '../appwrite/majorConif'
 import DatabaseService from '../appwrite/majorConif'
 function PostCard({

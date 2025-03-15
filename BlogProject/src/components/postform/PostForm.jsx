@@ -20,6 +20,7 @@ function PostForm({ post }) {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userData);
   const submit = async (data) => {
+    console.log("submit in the post form is cALLED WITH DATA ",data)
     if (post) {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
@@ -46,6 +47,10 @@ function PostForm({ post }) {
           userId: userData.$id,
           // why we are overwriting userId here? ? ?
         });
+        console.log(dbPost);
+        if(dbPost){
+          navigate(`/post/${dbPost.$id}`)
+        }
       }
     }
   };
