@@ -33,7 +33,7 @@ export class DatabaseService{
             
         }
     }
-    async updatePost(slug,{title , content , featureImage ,status}){
+    async updatePost(slug,{title , content , featuredImage ,status}){
         try {
             const updatedPost = await this.databases.updateDocument(
                 config.appwriteDatabaseId ,
@@ -42,7 +42,7 @@ export class DatabaseService{
                 {
                     title ,
                     content ,
-                    featureImage ,
+                    featuredImage ,
                     status
                 }
             )

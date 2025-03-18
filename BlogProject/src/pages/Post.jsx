@@ -5,16 +5,20 @@ import  appwriteService  from "../appwrite/majorConif";
 import  Buttons  from "../components/Buttons";
 import  Container  from "../components/container/Container";
 import parse from "html-react-parser";
+import { useDispatch } from "react-redux";
+import { deletePost as storeDeletePost } from "../store/PostSlice";
 function Post() {
   let [post, setPost] = useState(null);
   let { slug } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const userData = useSelector((state) => state.auth.userData);
   useEffect(() => {
     if (slug) {
       appwriteService.getPost(slug).then((post) => {
         if (post) {
-          setPost(post);
+          setPost((prev) => prev = post);
+          console.log("image id",post.featuredImage);
         } else {
           navigate("/");
         }
@@ -23,6 +27,8 @@ function Post() {
       navigate("/");
     }
   }, [slug, navigate]);
+ 
+  
   let isAuthor;
   if (post && userData) {
     if (post.userId === userData.$id) {
@@ -35,6 +41,7 @@ function Post() {
     appwriteService.deletePost(post.$id).then((status) => {
       if (status) {
         appwriteService.deleteFile(post.featuredImage);
+        dispatch(storeDeletePost(post.$id))
         navigate("/");
       }
     });

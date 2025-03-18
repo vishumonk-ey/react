@@ -5,11 +5,12 @@ import Select from "../Select"
 import  Button from "../Buttons"
 import { useForm } from "react-hook-form";
 import appwriteService from "../../appwrite/majorConif";
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addPost, updatePost } from "../../store/PostSlice";
 function PostForm({ post }) {
-  console.log(post);
-  
+  // console.log(post);
+  let dispatch = useDispatch()
   const { register, handleSubmit, control, watch, setValue, getValues } =
     useForm({
       defaultValues: {
@@ -27,6 +28,8 @@ function PostForm({ post }) {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
         : null;
+        // console.log("new file is correctly uploaded",file.$id);
+        
       if (file) {
         await appwriteService.deleteFile(post.featuredImage); // har ek post me jo attributes stored hain get it from appwrite db server
       }
@@ -36,6 +39,8 @@ function PostForm({ post }) {
       });
       // updatePost me slug is needed so .$id will directly give us the slug
       if (dbPost) {
+        // console.log(dbPost);
+        dispatch(updatePost(dbPost))
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
@@ -49,8 +54,9 @@ function PostForm({ post }) {
           userId: userData.$id,
           // why we are overwriting userId here? ? ?
         });
-        console.log(dbPost);
+        // console.log(dbPost);
         if(dbPost){
+          dispatch(addPost(dbPost))
           navigate(`/post/${dbPost.$id}`)
         }
       }

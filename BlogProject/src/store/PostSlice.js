@@ -20,9 +20,25 @@ const postSlice = createSlice({
     },
     removePostLoading : (state,action) =>{
         state.postLoaded = false
+    },
+    addPost:(state,action)=> {
+      state.posts.push(action.payload)
+    },
+    deletePost : (state,action) =>{
+      let newPosts = state.posts.filter((eachPost)=>(
+        eachPost.$id !== action.payload
+      ))
+      state.posts = newPosts
+    },
+    updatePost : (state,action) => {
+      const updatedPost = action.payload
+      const newPosts = state.posts.map((eachPost)=>(
+        eachPost.$id === updatedPost.$id ? (updatedPost) : (eachPost)
+      ))
+      state.posts=newPosts
     }
   },
 });
 
 export default postSlice.reducer
-export const {fetchPosts , removePostLoading} = postSlice.actions
+export const {fetchPosts , removePostLoading , addPost ,deletePost,updatePost} = postSlice.actions
