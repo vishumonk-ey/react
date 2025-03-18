@@ -9,7 +9,8 @@ function Home() {
   const [req, setreq] = useState(false);
   const dispatch = useDispatch();
 
-  const postsLoaded = useSelector((state) => state.post.postsLoaded);
+  const postsLoaded = useSelector((state) => state.post.postLoaded);
+  console.log("postloaded",postsLoaded);
   useEffect(() => {
     if (!postsLoaded) {
       appwriteService
@@ -24,9 +25,10 @@ function Home() {
   }, []);
   const allPosts = useSelector((state) => state.post.posts);
   useEffect(() => {
-    // console.log(allPosts);
+    console.log(allPosts);
     setPosts(allPosts);
-  }, []);
+  }, [postsLoaded]);
+  // forgot postsloaded which caused error
   if (req === false && posts.length === 0) {
     return (
       <div className="w-full py-8 mt-4 text-center text-2xl">

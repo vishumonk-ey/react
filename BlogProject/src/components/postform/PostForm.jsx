@@ -8,17 +8,19 @@ import appwriteService from "../../appwrite/majorConif";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 function PostForm({ post }) {
+  console.log(post);
+  
   const { register, handleSubmit, control, watch, setValue, getValues } =
     useForm({
       defaultValues: {
         title: post?.title || "",
         content: post?.content || "",
-        slug: post?.slug || "",
+        slug: post?.$id|| "",
         status: post?.status || "active",
       },
     });
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.userData);
+  const userData = useSelector((state) => state.auth.userData);
   const submit = async (data) => {
     console.log("submit in the post form is cALLED WITH DATA ",data)
     if (post) {

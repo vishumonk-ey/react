@@ -9,7 +9,7 @@ function Post() {
   let [post, setPost] = useState(null);
   let { slug } = useParams();
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.userData);
+  const userData = useSelector((state) => state.auth.userData);
   useEffect(() => {
     if (slug) {
       appwriteService.getPost(slug).then((post) => {

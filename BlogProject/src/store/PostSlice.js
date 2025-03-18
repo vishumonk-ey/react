@@ -15,7 +15,8 @@ const postSlice = createSlice({
     //     state.postLoaded = true
     //   }).catch((err) => console.log("error in getting posts",err))
       state.posts = action.payload
-      console.log(action)
+      state.postLoaded = true
+    //   console.log(action)
     },
     removePostLoading : (state,action) =>{
         state.postLoaded = false
