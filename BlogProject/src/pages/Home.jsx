@@ -23,11 +23,12 @@ function Home() {
       // dispatch(fetchPosts());
     }
   }, []);
-  const allPosts = useSelector((state) => state.post.posts);
+  const allPosts = useSelector((state) => state.post.posts  );
+  console.log("allposts",allPosts);
   useEffect(() => {
     console.log(allPosts);
     setPosts(allPosts);
-  }, [postsLoaded]);
+  }, [postsLoaded,allPosts]);
   // forgot postsloaded which caused error
   if (req === false && posts.length === 0) {
     return (

@@ -21,6 +21,9 @@ const postSlice = createSlice({
     removePostLoading : (state,action) =>{
         state.postLoaded = false
     },
+    removeAllPosts:( state ,action) => {
+      state.posts = []
+    } ,
     addPost:(state,action)=> {
       state.posts.push(action.payload)
     },
@@ -41,4 +44,4 @@ const postSlice = createSlice({
 });
 
 export default postSlice.reducer
-export const {fetchPosts , removePostLoading , addPost ,deletePost,updatePost} = postSlice.actions
+export const {fetchPosts, removeAllPosts , removePostLoading , addPost ,deletePost,updatePost} = postSlice.actions
