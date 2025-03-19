@@ -12,7 +12,7 @@ function LogoutBtn() {
         .then( ()=>{
             dispatch(logout())
             // dispatch(removePostLoading())
-            dispatch(removeAllPosts())
+            // dispatch(removeAllPosts())
             navigate('/')
         })
         .catch(

@@ -8,7 +8,7 @@ function Home() {
   let [posts, setPosts] = useState([]);
   const [req, setreq] = useState(false);
   const dispatch = useDispatch();
-
+  const isLoggedIn = useSelector((state) =>state.auth.status)
   const postsLoaded = useSelector((state) => state.post.postLoaded);
   console.log("postloaded",postsLoaded);
   useEffect(() => {
@@ -30,13 +30,13 @@ function Home() {
     setPosts(allPosts);
   }, [postsLoaded,allPosts]);
   // forgot postsloaded which caused error
-  if (req === false && posts.length === 0) {
+  if ( !isLoggedIn ) {
     return (
       <div className="w-full py-8 mt-4 text-center text-2xl">
-        <h1 className="hover:underline ">Please Wait !</h1>
+        <h1 className="hover:underline ">Log In to view posts</h1>
       </div>
     );
-  } else if (req === true && posts.length === 0) {
+  } else if ( posts.length === 0 ) {
     return (
       <div className="w-full py-8 mt-4 text-center text-2xl">
         <h1 className="hover:underline ">No Posts yet !</h1>
