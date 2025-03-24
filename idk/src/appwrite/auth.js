@@ -43,12 +43,20 @@ class AuthService {
       console.log("updation error", error);
     }
   }
-  async logout() {}
+  async logout() {
+    try {
+      this.client.setEndpoint(config.appwriteEndpoint);
+      this.account = new Account(this.client);
+      
+    } catch (error) {
+      console.log("error in logging Out", error);
+    }
+  }
   async getCurrentuser() {
     try {
-        return await this.account.get()
+      return await this.account.get();
     } catch (error) {
-        console.log("error in getting the current user",error);        
+      console.log("error in getting the current user", error);
     }
   }
 }
