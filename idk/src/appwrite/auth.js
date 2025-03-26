@@ -5,18 +5,19 @@ class AuthService {
   // client is outside any method jaise hi class declare hoyega tabhi client declare hojayega , basically connection ek common hogya aur global jo harr ek method me aayega to iss vjh se aur bhi service objects create kr skta huuu
   constructor() {
     this.account = new Account(this.client);
+    // by default has default endpoint so no need to setEndpoint , and we are using appwrite cloud services which are maintained by them only , hosted , scaling vo sab hi dekhte hainnn
   }
-  async signUp(email, pass) {
+  async signUp({email, password , name}) {
     try {
-      const newAccount = await this.account.create(ID.unique(), email, pass);
+      const newAccount = await this.account.create(ID.unique(), email, password , name);
       if (newAccount) {
-        return await this.logIn(email, pass);
+        return await this.logIn({email, password});
       }
     } catch (error) {
       console.log("sign up method error", error);
     }
   }
-  async logIn(email, pass) {
+  async logIn({email, pass}) {
     try {
       const loggedInUser = await this.account.createEmailPasswordSession(
         email,
@@ -27,7 +28,7 @@ class AuthService {
       console.log("appwrite login error", error);
     }
   }
-  async initiatePasswordRecovery(email) {
+  async initiatePasswordRecovery({email}) {
     const callbackURL = "";
     // add the route
     try {
@@ -36,7 +37,7 @@ class AuthService {
       console.log("erroin in initating pwd recovery", error);
     }
   }
-  async updatePassword(userID, secretKey, password) {
+  async updatePassword({userID, secretKey, password}) {
     try {
       return await this.account.updateRecovery(userID, secretKey, password);
     } catch (error) {
@@ -45,9 +46,7 @@ class AuthService {
   }
   async logout() {
     try {
-      this.client.setEndpoint(config.appwriteEndpoint);
-      this.account = new Account(this.client);
-      
+         return await this.account.deleteSession("current")         
     } catch (error) {
       console.log("error in logging Out", error);
     }
@@ -60,3 +59,5 @@ class AuthService {
     }
   }
 }
+const authService = new AuthService();
+export default authService;
