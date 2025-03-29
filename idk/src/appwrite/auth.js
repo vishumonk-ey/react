@@ -14,7 +14,8 @@ class AuthService {
         return await this.logIn({email, password});
       }
     } catch (error) {
-      console.log("sign up method error", error);
+      // console.log("sign up method error", error);
+      throw error
     }
   }
   async logIn({email, pass}) {
@@ -25,7 +26,8 @@ class AuthService {
       );
       return loggedInUser;
     } catch (error) {
-      console.log("appwrite login error", error);
+      // console.log("appwrite login error", error);
+      throw error
     }
   }
   async initiatePasswordRecovery({email}) {

@@ -8,6 +8,8 @@ import React, { forwardRef, useId } from "react";
 // forwardRef is used for transferring the reference
 const Input = forwardRef(
   ({ label, placeholder, type = "text", className = "", ...props },ref) => {
+    console.log("this is my ref",ref);
+    
     const id = useId(); // what was the need for this?
     return (
       <div className="w-full">

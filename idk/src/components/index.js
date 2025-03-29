@@ -3,7 +3,13 @@ import Button from "./Button"
 import Logo from './Logo'
 import Header from "./header/Header"
 import Logout from './header/Logout'
-export default {
+import Input from './Input'
+import Login from './Login'
+import Signup from './Signup'
+export {
+    Input,
+    Login,
+    Signup,
     Container,
     Header,
     Logout,
