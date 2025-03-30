@@ -6,8 +6,10 @@ import Logout from './header/Logout'
 import Input from './Input'
 import Login from './Login'
 import Signup from './Signup'
+import PostCard from "./PostCard"
 export {
     Input,
+    PostCard,
     Login,
     Signup,
     Container,

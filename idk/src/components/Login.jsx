@@ -62,6 +62,7 @@ function Login() {
                   required: true,
                   // validate ---> yaha pattern matching karva dena last me ..
                 })}
+                // register returns an object with name , onChange , onBlur event listener and it is spreaded to pass on to our input component 
               />
               {errors.email && (
                 <p className="text-red-600 text-center">{error.email}</p>
