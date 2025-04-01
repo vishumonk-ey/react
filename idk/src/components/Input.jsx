@@ -14,6 +14,7 @@ const Input = forwardRef(({ type = "text", label, placeholder, className,...prop
         type={type}
         placeholder={placeholder}
         ref={ref}
+        {...props}
         className={`outline-none px-3 py-2 rounded-lg bg-white text-black focus:bg-gray-50 border border-gray-50 w-full duration-200 ${className}`}
       />
     </div>

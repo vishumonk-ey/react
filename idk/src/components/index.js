@@ -10,8 +10,10 @@ import PostCard from "./PostCard";
 import Post from "./Posts";
 import AuthLayout from "./AuthLayout";
 import RTE from "./RTE"
+import Postform from "./postform/Postform";
 export {
   AuthLayout,
+  Postform,
   Post,
   RTE,
   Input,
