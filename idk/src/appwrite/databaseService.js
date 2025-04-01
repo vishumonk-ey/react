@@ -21,14 +21,14 @@ class DatabaseService {
       console.log("creating document error", error);
     }
   }
-  async updatePost({ title, content, imageId, authorId }, slug) {
+  async updatePost({ title, content, imageId }, slug) {
     // post data will be myy json object
     try {
       return await this.database.updateDocument(
         config.appwriteDatabaseId,
         config.appwriteCollectionId,
         slug,
-        { title, content, imageId, authorId }
+        { title, content, imageId }
       );
     } catch (error) {
       console.log("creating document error", error);
@@ -67,12 +67,12 @@ class DatabaseService {
     }
   }
   //   for file storage , bucket
-  async createFile() {
+  async uploadFile(file) {
     try {
       return await this.storage.createFile(
         config.appwriteBucketId,
         ID.unique(),
-        document.getElementById("uploader").files[0]
+        file
       );
     } catch (error) {
       console.log("uploadFIle", error);
