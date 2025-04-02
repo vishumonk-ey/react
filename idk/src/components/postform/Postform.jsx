@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import RTE from "../index";
 import Input from "../index";
 import Button from "../index";
@@ -6,6 +6,8 @@ import Container from "../index";
 import { useForm } from "react-hook-form";
 import databaseService from "../../appwrite/databaseService";
 import { addPost, updatePosts } from "../../store/postSlice";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 function Postform({ post }) {
   const { register, handleSubmit, watch, control, setValue, getValues } =
     useForm({
@@ -13,11 +15,52 @@ function Postform({ post }) {
         title: post?.title || "",
         content: post?.content || "Write your text here...",
         imageId: post?.imageId || "",
+        slug: post?.slug || "",
       },
     });
-  const [slug, setSlug] = useState("");
-  const submit = (data) => {
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.auth.userData);
+  // const [slug, setSlug] = useState("");
+  const submit = async (data) => {
     if (post) {
+      const newImage = data.image[0]
+        ? await databaseService.uploadFile()
+        : null;
+      if (newImage) {
+        await databaseService.deleteFile(post.imageId);
+        //  const updatedPost = await databaseService.updatePost({
+        //      ...data,
+        //      imageId: newImage.$id } , post.$id
+        //     );
+        // slug isnt changing so deleting the old and creating new with same data
+      }
+      const deleteOldPost = await databaseService.deletePost(post.$id);
+      if (deleteOldPost) {
+        const newPost = await databaseService.createPost(
+          {
+            ...data,
+            imageId: newImage.$id || data.imageId,
+            authorId: userData.$id,
+          },
+          data.slug
+        );
+        if (newPost) {
+          navigate(`posts/${newPost.$id}`);
+        }
+      }
+    } else {
+      const image = await databaseService.uploadFile(data.image[0]);
+      const newPost = await databaseService.createPost(
+        {
+          ...data,
+          imageId: image.$id,
+          authorId: userData.$id,
+        },
+        slug
+      );
+      if (newPost){
+        navigate(`posts/${newPost.$id}`)
+      }
     }
   };
   const slugTransform = useCallback((value) => {
@@ -30,7 +73,16 @@ function Postform({ post }) {
 
     return slug;
   }, []);
-
+  useEffect(()=>{
+    const subscription = watch((value , {name})=>{
+        if (name === "title"){
+          setValue("slug",slugTransform(value.title))
+        }
+    })
+    return () => subscription.unsubscribe()
+  },
+  []) 
+  // my useEffect will run once when the component mounts , and it is continously watching until my component unmounts , we can only return a function in useEffect which will run when useEffect runs again or component unmounts.
   return (
     <Container>
       <form onSubmit={handleSubmit(submit)}>
@@ -42,23 +94,28 @@ function Postform({ post }) {
               required: true,
             })}
           />
-          <RTE control = {control} defaultValues = {getValues(content)}/>
+          <RTE control={control} defaultValues={getValues(content)} />
         </div>
         <div className="w-1/3 px-2 space">
-            <Input 
-              type = "file"
-              label = "Upload file"
-              placeholder ="Upload File"
-              {...register("image",{
-                required : true
-              })}
-            />
-            {post && (<div className="w-full">
-              <img className="rounded-lg" src={databaseService.getFilePreview(post.imageId)}/>
-            </div>)}
-            <Button className={post ? "bg-orange-400" : "bg-blue-400"}>
-              {post ? "Edit" : "Add"}
-            </Button>
+          <Input
+            type="file"
+            label="Upload file"
+            placeholder="Upload File"
+            {...register("image", {
+              required: true,
+            })}
+          />
+          {post && (
+            <div className="w-full">
+              <img
+                className="rounded-lg"
+                src={databaseService.getFilePreview(post.imageId)}
+              />
+            </div>
+          )}
+          <Button className={post ? "bg-orange-400" : "bg-blue-400"}>
+            {post ? "Edit" : "Add"}
+          </Button>
         </div>
       </form>
     </Container>
