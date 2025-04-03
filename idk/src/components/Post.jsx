@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Container from "../components/index";
-import Button from "../components/index";
+import Container from "./index";
+import Button from "./index";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";

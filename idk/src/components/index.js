@@ -7,9 +7,9 @@ import Input from "./Input";
 import Login from "./Login";
 import Signup from "./Signup";
 import PostCard from "./PostCard";
-import Post from "./Posts";
+import Post from "./Post";
 import AuthLayout from "./AuthLayout";
-import RTE from "./RTE"
+import RTE from "./RTE";
 import Postform from "./postform/Postform";
 export {
   AuthLayout,
