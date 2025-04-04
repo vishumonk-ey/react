@@ -12,6 +12,8 @@ function Post() {
   let { slug } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  console.log("state",useSelector((state) => state));
+  
   const userData = useSelector((state) => state.auth.userData);
   useEffect(() => {
     if (slug) {
