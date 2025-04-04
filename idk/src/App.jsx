@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
 import "./App.css";
 import { Header, Footer } from "./components/index";
 import { Outlet } from "react-router-dom";
@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom";
 import appwriteService from "./appwrite/auth";
 import { useDispatch } from "react-redux";
 import { login, logout } from "./store/authSlice";
+import {LoadingPage} from "./components/index";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function App() {
     appwriteService
       .getCurrentuser()
       .then((userdata) => {
-        if (data) {
+        if (userdata) {
           dispatch(login(userdata));
         } else {
           dispatch(logout());

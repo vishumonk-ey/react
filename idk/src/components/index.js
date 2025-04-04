@@ -11,8 +11,10 @@ import Post from "./Post";
 import AuthLayout from "./AuthLayout";
 import RTE from "./RTE";
 import Postform from "./postform/Postform";
-import Footer from "./footer/Footer"
+import Footer from "./footer/Footer";
+import LoadingPage from "./LoadingPage";
 export {
+  LoadingPage,
   Footer,
   AuthLayout,
   Postform,

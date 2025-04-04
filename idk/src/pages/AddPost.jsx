@@ -1,5 +1,5 @@
 import React from "react";
-import PostForm from "../components/index";
+import {Postform} from "../components/index";
 function AddPost() {
   return (
       <PostForm />

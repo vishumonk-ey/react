@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import RTE from "../index";
-import Input from "../index";
-import Button from "../index";
-import Container from "../index";
+import {RTE} from "../index";
+import {Input} from "../index";
+import {Button} from "../index";
+import {Container} from "../index";
 import { useForm } from "react-hook-form";
 import databaseService from "../../appwrite/databaseService";
-import { addPost, updatePosts } from "../../store/postSlice";
+import {addPosts,updatePosts} from "../../store/postSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 function Postform({ post }) {

@@ -1,8 +1,8 @@
 import React from 'react'
-import Signup from '../components/index'
+import {Signup as SignUpComponent} from '../components/index'
 function SignUp() {
   return (
-    <SignUp/>
+    <SignUpComponent/>
   )
 }
 

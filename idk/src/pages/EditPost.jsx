@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PostForm from '../components/index'
+import {Postform} from '../components/index'
 import { useParams } from 'react-router-dom'
 import databaseService from '../appwrite/databaseService'
 function EditPost() {

@@ -5,6 +5,8 @@ class AuthService {
   // client is outside any method jaise hi class declare hoyega tabhi client declare hojayega , basically connection ek common hogya aur global jo harr ek method me aayega to iss vjh se aur bhi service objects create kr skta huuu
   constructor() {
     this.account = new Account(this.client);
+    console.log(config.appwriteProjectId);
+    
     // by default has default endpoint so no need to setEndpoint , and we are using appwrite cloud services which are maintained by them only , hosted , scaling vo sab hi dekhte hainnn
   }
   async signUp({email, password , name}) {

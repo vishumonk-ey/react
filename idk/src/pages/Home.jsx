@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PostCard, { Container } from "../components/index";
+import {PostCard , Container } from "../components/index";
 import { useDispatch, useSelector } from "react-redux";
 import databaseService from "../appwrite/databaseService";
 
 // import { data } from "react-router-dom";
 import { addPosts } from "../store/postSlice";
 function Home() {
+  console.log("rendered");
+  
   const [allPosts, setallPosts] = useState([]);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);

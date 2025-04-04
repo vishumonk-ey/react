@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { login as authlogin } from "../store/authSlice";
-import Logo from "../components/index";
+import {Logo} from "../components/index";
 import { Input } from "../components/index";
 import {Button} from "../components/index"
 import { useDispatch } from "react-redux";

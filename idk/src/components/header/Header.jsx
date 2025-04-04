@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom";
-import Button from "../index"
+import {Button} from "../index"
 import {Logo} from "../index"
 import Container from "../container/Container";
-import Logout from '../index'
+import {Logout} from '../index'
 function Header() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const navItems = [
