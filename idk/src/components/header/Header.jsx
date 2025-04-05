@@ -47,8 +47,8 @@ function Header() {
   ];
   // const handleLogOut = () => {}
   return (
-    <header className="py-3 shadow bg-gray-500/50 px-2">
-      <Container>
+    <header className="py-5 shadow bg-gray-500/50 px-12">
+      
         <nav className="flex items-center">
           {/* Logo */}
           <div className="flex items-center">
@@ -60,27 +60,29 @@ function Header() {
             </p>
           </div>
           {/* Nav Items */}
-          <ul className="flex items-center">
+          <ul className="flex items-center ml-auto space-x-2">
             {
               navItems.map((
                 eachNavItem
               )=>(
-                <li key={eachNavItem.slug}>
+                eachNavItem.status ?
+                (<li key={eachNavItem.slug}>
                   <NavLink to={eachNavItem.slug} className={({isActive})=>(
-                    isActive ? "bg-orange-400" :" "
+                    isActive ? "":" "
                   )}>
                       <Button>
                           {eachNavItem.name}
                       </Button>
                   </NavLink>
-                </li>
+                </li>) : (null)
               ))
             }
+            {!isLoggedIn ? (null) : (<li className="ml-10"><Logout/></li>)}
           </ul>
 
-          {isLoggedIn ? (null) : (<Logout/>)}
+          
         </nav>
-      </Container>
+      
     </header>
   );
 }

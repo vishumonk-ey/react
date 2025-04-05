@@ -72,7 +72,7 @@ function Login() {
               <Input
                 placeholder="Password"
                 label="Password : "
-                {...register("pass", {
+                {...register("password", {
                   required: true,
                   // validate :
                 })}
@@ -82,7 +82,7 @@ function Login() {
               )}
             </div>
           </div>
-          <Button className="hover:bg-orange-400">Log In</Button>
+          <Button className="hover:bg-orange-400 w-full mt-6">Log In</Button>
         </form>
       </div>
     </div>

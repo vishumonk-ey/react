@@ -94,7 +94,7 @@ function Postform({ post }) {
               required: true,
             })}
           />
-          <RTE control={control} defaultValues={getValues(content)} />
+          <RTE control={control} defaultValues={getValues("content")} />
         </div>
         <div className="w-1/3 px-2 space">
           <Input

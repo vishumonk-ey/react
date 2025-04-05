@@ -53,7 +53,7 @@ function SignUp() {
         </div>
 
         <form onSubmit={handleSubmit(signup)}>
-          <div className="space-y-5">
+          <div className="space-y-3">
             <div className="space-y-2">
                 <Input placeholder="Name" label="Name : "
                 {...register("name",{
@@ -78,7 +78,7 @@ function SignUp() {
               <Input
                 placeholder="Password"
                 label="Password : "
-                {...register("pass", {
+                {...register("password", {
                   required: true,
                   // validate :
                 })}
@@ -88,7 +88,7 @@ function SignUp() {
               )}
             </div>
           </div>
-          <Button className="hover:bg-orange-400">Sign Up</Button>
+          <Button className="hover:bg-orange-400 w-full mt-6">Sign Up</Button>
         </form>
       </div>
     </div>

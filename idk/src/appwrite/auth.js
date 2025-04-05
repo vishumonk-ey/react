@@ -20,11 +20,11 @@ class AuthService {
       throw error
     }
   }
-  async logIn({email, pass}) {
+  async logIn({email, password}) {
     try {
       const loggedInUser = await this.account.createEmailPasswordSession(
         email,
-        pass
+        password
       );
       return loggedInUser;
     } catch (error) {

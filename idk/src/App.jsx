@@ -31,13 +31,13 @@ function App() {
   if (loading) {
     return <LoadingPage />;
   } else {
-    <div className="min-h-screen flex flex-wrap content-between ">
+    return(<div className="min-h-screen flex flex-wrap content-between ">
       <div className="w-full block">
         <Header />
         <Outlet />
         <Footer />
       </div>
-    </div>;
+    </div>)
   }
 }
 

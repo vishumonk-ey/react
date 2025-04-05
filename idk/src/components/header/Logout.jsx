@@ -19,7 +19,7 @@ function Logout() {
     }
   };
   return (
-    <Button className="hover:bg-green-500" onClick={handleLogOut}>
+    <Button className="hover:bg-green-500 bg-orange-700" onClick={handleLogOut}>
       {" "}
       Logout{" "}
     </Button>
