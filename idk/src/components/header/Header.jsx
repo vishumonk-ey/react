@@ -47,7 +47,7 @@ function Header() {
   ];
   // const handleLogOut = () => {}
   return (
-    <header className="py-5 shadow bg-gray-500/50 px-12">
+    <header className="py-3 sticky top-0 z-100 shadow bg-gray-500/50 px-12">
       
         <nav className="flex items-center">
           {/* Logo */}

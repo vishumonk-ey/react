@@ -12,6 +12,7 @@ import Signup from "./pages/SignUp.jsx";
 import EditPost from "./pages/EditPost.jsx";
 import Post from "./pages/Post.jsx";
 import AuthLayout from "./components/AuthLayout.jsx";
+import AllPosts from "./pages/AllPosts.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
         element : (
           <AuthLayout authRequired={true}>
             <Post/>
+          </AuthLayout>
+        )
+      },
+      {
+        path : "/all-posts",
+        element :(
+          <AuthLayout authRequired={true}>
+            <AllPosts/>
           </AuthLayout>
         )
       }

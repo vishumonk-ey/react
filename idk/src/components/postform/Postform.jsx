@@ -85,14 +85,16 @@ function Postform({ post }) {
   // my useEffect will run once when the component mounts , and it is continously watching until my component unmounts , we can only return a function in useEffect which will run when useEffect runs again or component unmounts.
   return (
     <Container>
-      <form onSubmit={handleSubmit(submit)}>
+      <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
         <div className="w-2/3 px-2 ">
           <Input
-            label="Title"
+            label="Title :"
             placeholder="Title"
+            className="mb-4"
             {...register("title", {
               required: true,
             })}
+            
           />
           <RTE control={control} defaultValues={getValues("content")} />
         </div>
@@ -101,6 +103,7 @@ function Postform({ post }) {
             type="file"
             label="Upload file"
             placeholder="Upload File"
+            className={"mb-4"}
             {...register("image", {
               required: true,
             })}
