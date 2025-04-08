@@ -1,7 +1,9 @@
 import { Client, Databases, ID, Storage } from "appwrite";
 import { config } from "../assets/config";
 class DatabaseService {
-  client = new Client().setProject(config.appwriteProjectId);
+  client = new Client()
+      .setProject(config.appwriteProjectId)
+      .setEndpoint(config.appwriteUrl);
   database;
   storage;
   constructor() {
@@ -101,5 +103,5 @@ class DatabaseService {
   }
 }
 
-const databaseService = new DatabaseService()
-export default databaseService
+const databaseService = new DatabaseService();
+export default databaseService;

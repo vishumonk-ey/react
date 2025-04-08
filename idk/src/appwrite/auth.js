@@ -1,7 +1,8 @@
 import { Client, Account, ID } from "appwrite";
 import { config } from "../assets/config";
 class AuthService {
-  client = new Client().setProject(config.appwriteProjectId);
+  client = new Client().setProject(config.appwriteProjectId)
+  .setEndpoint(config.appwriteUrl)
   // client is outside any method jaise hi class declare hoyega tabhi client declare hojayega , basically connection ek common hogya aur global jo harr ek method me aayega to iss vjh se aur bhi service objects create kr skta huuu
   constructor() {
     this.account = new Account(this.client);

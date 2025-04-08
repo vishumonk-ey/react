@@ -27,7 +27,10 @@ function Login() {
         navigate("/"); // navigate ka benefit is i dont have to manually click or something as compared to link method .
         // userData milne ke baad i logged in because store me mai status aur userData store kar raha hu so i need userData
       }
+      console.log("try block ran");
+      
     } catch (error) {
+      console.log(error);
       setError(error);
     }
   };
@@ -52,7 +55,7 @@ function Login() {
             Sign Up
           </Link>
         </p>
-        {error && <p className="text-red-600 mt-8 text-center">{error.message}</p>}
+        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
         <form
           onSubmit={handleSubmit(login)} // handleSubmit is my method so it will execute while rendering or declaring(whats the correct term to say) right?
           // and also while submitting i wwould have to prevent default right?

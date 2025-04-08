@@ -21,6 +21,7 @@ function App() {
         } else {
           dispatch(logout());
         }
+        console.log(userdata);
       })
       .catch((err) =>
         console.log("error in getting user or no session exists yet", err)

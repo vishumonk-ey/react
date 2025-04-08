@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import databaseService from "../appwrite/databaseService";
 import {addPosts} from "../store/postSlice"
 import { LoadingPage } from "../components";
 import {PostCard , Container} from "../components/index";
 import { Link } from "react-router-dom";
 function AllPosts() {
+  const dispatch = useDispatch()
   const [allPosts, setAllposts] = useState(null);
 //   const [loading,setLoading] = useState(true)
   const storePosts = useSelector((state) => state.posts.allPosts)
+  console.log("my state",useSelector((state) => state));
+  
   useEffect(() => {
     setAllposts(storePosts);
     if (allPosts === null) {
