@@ -22,6 +22,8 @@ function Postform({ post }) {
   const userData = useSelector((state) => state.auth.userData);
   // const [slug, setSlug] = useState("");
   const submit = async (data) => {
+    console.log(data);
+    
     if (post) {
       const newImage = data.image[0]
         ? await databaseService.uploadFile()
@@ -56,10 +58,10 @@ function Postform({ post }) {
           imageId: image.$id,
           authorId: userData.$id,
         },
-        slug
+        data.slug
       );
       if (newPost){
-        navigate(`posts/${newPost.$id}`)
+        navigate(`/posts/${newPost.$id}`)
       }
     }
   };
