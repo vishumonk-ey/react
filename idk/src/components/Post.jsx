@@ -10,11 +10,15 @@ function Post() {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const navigate = useNavigate();
+  // let authorId;
   useEffect(() => {
     databaseService
       .getPost(slug)
       .then((resolvedPost) => {
-        resolvedPost ? setPost(resolvedPost) : navigate("/");
+        resolvedPost ? setPost((resolvedPost)) : navigate("/");
+        console.log(resolvedPost);
+        
+        // authorId = post.authorId;
       })
       .catch((err) => {
         console.log("error in fetching post in post", err);
@@ -22,8 +26,14 @@ function Post() {
       });
   }, [slug, navigate]);
   const userId = useSelector((state) => state.auth.userData.$id);
-  let authorId = post.authorId;
-  let isAuthor = authorId === userId;
+ let isAuthor;
+ if(post && userId){
+    if ( userId === post.authorId) {
+      isAuthor = true
+    } else {
+      isAuthor = false
+    }
+ }
   const handleDelete = async () => {
     try {
       const status = await databaseService.deletePost(slug);
@@ -49,10 +59,10 @@ function Post() {
           </Button>
         </div>
       )}
-      <div className="w-full py-2">
+      <div className="w-full py-2 flex flex-col items-center space-y-4">
         <img
-          src={databaseService.getFilePreview(slug)}
-          className="rounded-xl"
+          src={databaseService.getFilePreview(post.imageId)}
+          className="rounded-xl w-1/2"
           alt={post.title}
         />
 
@@ -60,7 +70,7 @@ function Post() {
           {post.title}
         </h2>
 
-        <p className="mt-2">{parse(post.content)}</p>
+        {parse(post.content)}
       </div>
     </Container>
   ) : null;

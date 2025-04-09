@@ -113,7 +113,7 @@ function Postform({ post }) {
           {post && (
             <div className="w-full">
               <img
-                className="rounded-lg"
+                className="rounded-lg mb-4"
                 src={databaseService.getFilePreview(post.imageId)}
               />
             </div>

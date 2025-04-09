@@ -47,9 +47,9 @@ function Home() {
   } else if (!loading) {
     return (
       <Container>
-        <div className="py-6 flex flex-wrap space-x-2">
+        <div className="py-6 flex flex-wrap space-x-4">
           {allPosts.map((eachPost) => (
-            <div key={eachPost.$id}>
+            <div key={eachPost.$id} className="w-1/4">
               <PostCard {...eachPost}></PostCard>
             </div>
           ))}

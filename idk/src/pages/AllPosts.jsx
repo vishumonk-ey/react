@@ -5,15 +5,19 @@ import {addPosts} from "../store/postSlice"
 import { LoadingPage } from "../components";
 import {PostCard , Container} from "../components/index";
 import { Link } from "react-router-dom";
+import { set } from "react-hook-form";
 function AllPosts() {
   const dispatch = useDispatch()
   const [allPosts, setAllposts] = useState(null);
 //   const [loading,setLoading] = useState(true)
 const [onlyMyPosts, setOnlyMyPosts] = useState(false)
   const storePosts = useSelector((state) => state.posts.allPosts)
-  console.log("my state",useSelector((state) => state));
+  // console.log("my state",useSelector((state) => state));
+  const userId = useSelector((state)=> state.auth.userData.$id)
+  console.log(userId);
+  
   const handleFilter = async (e) => {
-    console.log(e.currentTarget);
+    console.log(e.currentTarget.value);
     
         if (e.currentTarget.value === "All Posts"){
           setOnlyMyPosts(false)
@@ -22,7 +26,7 @@ const [onlyMyPosts, setOnlyMyPosts] = useState(false)
         }
   }
   useEffect(() => {
-    setAllposts(storePosts);
+    setAllposts((prev)=>storePosts);
     if (allPosts === null) {
       databaseService.getAllPosts().then((fetchedPosts) => {
            if(fetchedPosts){
@@ -33,8 +37,14 @@ const [onlyMyPosts, setOnlyMyPosts] = useState(false)
            }
       });
     }
+    if (onlyMyPosts === true){
+      const afterFilterPosts = allPosts.map((eachPost) => (
+        eachPost.authorId === userId && (eachPost)
+      ))
+      setAllposts(afterFilterPosts)
+    }
     // setLoading(false)
-  }, [allPosts]);
+  }, [allPosts,onlyMyPosts]);
 
   if(allPosts === null){
     return (<LoadingPage/>)
@@ -50,7 +60,8 @@ const [onlyMyPosts, setOnlyMyPosts] = useState(false)
   } else {
     return (
         <Container>
-          <select value={onlyMyPosts} onChange={handleFilter} className="px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full">
+          <select value={onlyMyPosts} 
+          onChange={handleFilter} className="px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full">
                 <option value="All" selected>All Posts</option>
                 <option value="My Posts">My Posts</option>
             </select>

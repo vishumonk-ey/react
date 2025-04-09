@@ -1,4 +1,4 @@
-import { Client, Databases, ID, Storage } from "appwrite";
+import { Client, Databases, ID, Role, Storage } from "appwrite";
 import { config } from "../assets/config";
 class DatabaseService {
   client = new Client()
@@ -74,7 +74,9 @@ class DatabaseService {
       return await this.storage.createFile(
         config.appwriteBucketId,
         ID.unique(),
-        file
+        file ,
+        [
+        ]
       );
     } catch (error) {
       console.log("uploadFIle", error);
@@ -96,7 +98,7 @@ class DatabaseService {
     }
   }
   getFilePreview(fileId) {
-    const result = this.storage.getFilePreview(config.appwriteBucketId, fileId);
+    const result = this.storage.getFileView(config.appwriteBucketId, fileId);
     // ###########################################
     console.log("file preview method is returning me this", result);
     return result;
