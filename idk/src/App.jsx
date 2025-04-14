@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 // import viteLogo from "/vite.svg";
 import "./App.css";
 import { Header, Footer } from "./components/index";
-import { Outlet } from "react-router-dom";
+import { data, Outlet } from "react-router-dom";
 // import { createBrowserRouter, data } from "react-router-dom";
 import appwriteService from "./appwrite/auth";
 import { useDispatch } from "react-redux";
 import { login, logout } from "./store/authSlice";
-import {LoadingPage} from "./components/index";
+import { LoadingPage } from "./components/index";
+import databaseService from "./appwrite/databaseService";
+import { addPosts } from "./store/postSlice";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -18,10 +20,19 @@ function App() {
       .then((userdata) => {
         if (userdata) {
           dispatch(login(userdata));
+          //fetcching posts--:
+          databaseService
+            .getAllPosts()
+            .then((fetchedPosts) => {
+              dispatch(addPosts(fetchedPosts.documents));
+            })
+            .catch((errr) => {
+              console.log(errr);
+            });
         } else {
           dispatch(logout());
         }
-        console.log(userdata);
+        // console.log(userdata);
       })
       .catch((err) =>
         console.log("error in getting user or no session exists yet", err)
@@ -32,13 +43,15 @@ function App() {
   if (loading) {
     return <LoadingPage />;
   } else {
-    return(<div className="min-h-screen flex flex-wrap content-between ">
-      <div className="w-full block">
-        <Header />
-        <Outlet />
-        <Footer />
+    return (
+      <div className="min-h-screen flex flex-wrap content-between ">
+        <div className="w-full block">
+          <Header />
+          <Outlet />
+          <Footer />
+        </div>
       </div>
-    </div>)
+    );
   }
 }
 

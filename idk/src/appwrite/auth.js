@@ -27,6 +27,8 @@ class AuthService {
         email,
         password
       );
+      console.log(loggedInUser);
+      
       return loggedInUser;
     } catch (error) {
       // console.log("appwrite login error", error);

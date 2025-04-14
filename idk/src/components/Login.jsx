@@ -19,10 +19,16 @@ function Login() {
   const login = async (data) => {
     setError("");
     try {
-      const loggedInUserData = await authService.logIn(data);
-      if (loggedInUserData) {
-        dispatch(authlogin(loggedInUserData));
-        navigate("/")
+      const sessionInfo = await authService.logIn(data);
+      if (sessionInfo) {
+        // dispatch(authlogin(loggedInUserData));
+        // navigate("/")
+        const userData = await authService.getCurrentuser()
+        if (userData) {
+          dispatch(authlogin(userData))
+          navigate("/")
+        }
+
       }
     } catch (error) {
       console.log("error in logging in", error);

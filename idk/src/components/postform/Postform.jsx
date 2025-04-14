@@ -5,8 +5,8 @@ import {Button} from "../index";
 import {Container} from "../index";
 import { useForm } from "react-hook-form";
 import databaseService from "../../appwrite/databaseService";
-import {addPosts,updatePosts} from "../../store/postSlice";
-import { useSelector } from "react-redux";
+import {addPosts,deletePost,updatePosts} from "../../store/postSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 function Postform({ post }) {
   const { register, handleSubmit, watch, control, setValue, getValues } =
@@ -15,18 +15,22 @@ function Postform({ post }) {
         title: post?.title || "",
         content: post?.content || "Write your text here...",
         imageId: post?.imageId || "",
-        slug: post?.slug || "",
+        slug: post?.$id || "",
       },
     });
   const navigate = useNavigate();
+  console.log(useSelector((state)=>state));
+  const storedPosts = useSelector((state) => state.posts.allPosts)
   const userData = useSelector((state) => state.auth.userData);
+  const dispatch = useDispatch()
   // const [slug, setSlug] = useState("");
   const submit = async (data) => {
-    console.log(data);
+    // console.log(data);
+    // console.log("pot : "s,post);
     
     if (post) {
       const newImage = data.image[0]
-        ? await databaseService.uploadFile()
+        ? await databaseService.uploadFile(data.image[0])
         : null;
       if (newImage) {
         await databaseService.deleteFile(post.imageId);
@@ -47,7 +51,12 @@ function Postform({ post }) {
           data.slug
         );
         if (newPost) {
-          navigate(`posts/${newPost.$id}`);
+          // addPosts()
+          dispatch(updatePosts({
+            slugForDelete : post.$id ,
+            newPost
+          }))
+          navigate(`/posts/${newPost.$id}`);
         }
       }
     } else {
@@ -61,6 +70,7 @@ function Postform({ post }) {
         data.slug
       );
       if (newPost){
+        dispatch(addPosts([...storedPosts , newPost]))
         navigate(`/posts/${newPost.$id}`)
       }
     }
@@ -72,7 +82,8 @@ function Postform({ post }) {
       .replace(/[^\w\s-]/g, "") // Remove special characters except spaces and hyphens
       .replace(/[\s_]+/g, "-") // Replace spaces and underscores with hyphens
       .replace(/^-+|-+$/g, ""); // Remove leading and trailing hyphens
-
+    console.log(slug);
+    
     return slug;
   }, []);
   useEffect(()=>{

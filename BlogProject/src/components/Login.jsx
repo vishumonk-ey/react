@@ -19,8 +19,11 @@ function Login() {
     setError("");
     try {
       const session = await authService.logIn(data);
+      console.log("Login method is returning : ",session);
       if (session) {
         const userData = await authService.getUser();
+        console.log("get user returns : ",userData);
+        
         if (userData) {
           dispatch(storeLogin(userData));
         }
@@ -55,7 +58,7 @@ function Login() {
             Sign Up
           </Link>
         </p>
-        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        {error && <p className="text-red-600 mt-8 text-center">{error.message}</p>}
         <form
           onSubmit={handleSubmit(login)} // handleSubmit is my method so it will execute while rendering or declaring(whats the correct term to say) right?
           // and also while submitting i wwould have to prevent default right?

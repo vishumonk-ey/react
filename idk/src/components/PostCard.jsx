@@ -3,7 +3,7 @@ import databaseService from "../appwrite/databaseService";
 import { Link } from "react-router-dom";
 function PostCard({ $id, title, imageId }) {
   return (
-    <Link to = {`posts/${$id}`}>
+    <Link to = {`/posts/${$id}`}>
       <div className="w-full bg-gray-100 rounded-xl p-4 ">
         <img
           src={databaseService.getFilePreview(imageId)}

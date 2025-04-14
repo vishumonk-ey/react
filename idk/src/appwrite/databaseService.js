@@ -100,7 +100,7 @@ class DatabaseService {
   getFilePreview(fileId) {
     const result = this.storage.getFileView(config.appwriteBucketId, fileId);
     // ###########################################
-    console.log("file preview method is returning me this", result);
+    // console.log("file preview method is returning me this", result);
     return result;
   }
 }

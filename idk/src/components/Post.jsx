@@ -16,7 +16,7 @@ function Post() {
       .getPost(slug)
       .then((resolvedPost) => {
         resolvedPost ? setPost((resolvedPost)) : navigate("/");
-        console.log(resolvedPost);
+        console.log("my Post :" ,resolvedPost);
         
         // authorId = post.authorId;
       })
@@ -25,10 +25,11 @@ function Post() {
         navigate("/");
       });
   }, [slug, navigate]);
-  const userId = useSelector((state) => state.auth.userData.$id);
+  const userData = useSelector((state) => state.auth.userData);
  let isAuthor;
- if(post && userId){
-    if ( userId === post.authorId) {
+ //console.log("userData : " ,userData);
+ if(post && userData){
+    if ( userData.$id === post.authorId) {
       isAuthor = true
     } else {
       isAuthor = false
@@ -50,7 +51,7 @@ function Post() {
   return post ? (
     <Container>
       {isAuthor && (
-        <div className="w-full flex justify-end pr-2">
+        <div className="w-full flex justify-end pr-2 gap-2">
           <Link to={`/edit-post/${slug}`}>
             <Button className="hover:bg-amber-600/80">Edit</Button>
           </Link>

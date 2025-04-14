@@ -14,6 +14,9 @@ function Home() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const storedPosts = useSelector((state) => state.posts.allPosts);
   useEffect(() => {
+    console.log("useEfffect ran");
+    console.log("storedPosts",storedPosts);
+  
     if (storedPosts === null) {
       databaseService
         .getAllPosts()
@@ -47,9 +50,9 @@ function Home() {
   } else if (!loading) {
     return (
       <Container>
-        <div className="py-6 flex flex-wrap space-x-4">
+        <div className="py-6 grid grid-cols-3 gap-3">
           {allPosts.map((eachPost) => (
-            <div key={eachPost.$id} className="w-1/4">
+            <div key={eachPost.$id} >
               <PostCard {...eachPost}></PostCard>
             </div>
           ))}

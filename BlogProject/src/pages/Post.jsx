@@ -15,6 +15,8 @@ function Post() {
   console.log("state",useSelector((state) => state));
   
   const userData = useSelector((state) => state.auth.userData);
+  console.log(userData);
+  
   useEffect(() => {
     if (slug) {
       appwriteService.getPost(slug).then((post) => {
