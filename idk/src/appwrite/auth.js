@@ -65,6 +65,24 @@ class AuthService {
       console.log("error in getting the current user", error);
     }
   }
+  async updatePreferences(fileId){
+    try {
+        const promise = await this.account.updatePrefs({
+          profileImageId : fileId
+        }) 
+        return promise 
+    } catch (error) {
+      console.log("error in updating preferences", error);
+    }
+  }
+  async getPreferences(){
+    try {
+      const promise = await this.account.getPrefs()
+      return promise
+    } catch (error) {
+      console.log("error in getting preferences :",error)
+    }
+  }
 }
 const authService = new AuthService();
 export default authService;
