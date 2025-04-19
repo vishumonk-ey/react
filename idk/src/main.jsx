@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import  store  from "./store/store.js";
+import store from "./store/store.js";
 import Home from "./pages/Home.jsx";
 import AddPost from "./pages/AddPost.jsx";
 import Login from "./pages/Login.jsx";
@@ -13,6 +13,7 @@ import EditPost from "./pages/EditPost.jsx";
 import Post from "./pages/Post.jsx";
 import AuthLayout from "./components/AuthLayout.jsx";
 import AllPosts from "./pages/AllPosts.jsx";
+import Profile from "./pages/Profile.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -55,21 +56,29 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path : "/posts/:slug",
-        element : (
+        path: "/posts/:slug",
+        element: (
           <AuthLayout authRequired={true}>
-            <Post/>
+            <Post />
           </AuthLayout>
-        )
+        ),
       },
       {
-        path : "/all-posts",
-        element :(
+        path: "/all-posts",
+        element: (
           <AuthLayout authRequired={true}>
-            <AllPosts/>
+            <AllPosts />
           </AuthLayout>
-        )
-      }
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <AuthLayout authRequired={true}>
+            <Profile />
+          </AuthLayout>
+        ),
+      },
     ],
   },
 ]);
