@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PostCard, Container, LoadingPage } from "../components/index";
 import { useDispatch, useSelector } from "react-redux";
 import databaseService from "../appwrite/databaseService";
-
+// import {} from "aceternity-ui"
 // import { data } from "react-router-dom";
 import { addPosts } from "../store/postSlice";
 function Home() {
@@ -50,7 +50,7 @@ function Home() {
   } else if (!loading) {
     return (
       <Container>
-        <div className="py-6 grid grid-cols-3 gap-3">
+        <div className="py-6 grid grid-cols-2 md:grid-cols-3 gap-3">
           {allPosts.map((eachPost) => (
             <div key={eachPost.$id} >
               <PostCard {...eachPost}></PostCard>

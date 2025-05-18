@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // import viteLogo from "/vite.svg";
 import "./App.css";
 import { Header, Footer } from "./components/index";
-import { data, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 // import { createBrowserRouter, data } from "react-router-dom";
 import appwriteService from "./appwrite/auth";
 import { useDispatch } from "react-redux";

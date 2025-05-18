@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Postform } from "../components/index";
-import { data, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import databaseService from "../appwrite/databaseService";
 function EditPost() {
   const { slug } = useParams();

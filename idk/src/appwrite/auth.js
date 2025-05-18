@@ -29,7 +29,7 @@ class AuthService {
   }
   async logIn({ email, password }) {
     try {
-      const loggedInUser = await this.account.createEmailPasswordSession(
+      const loggedInUser = await this.account.createEmailSession(
         email,
         password
       );
