@@ -31,6 +31,8 @@ const postSlice = createSlice({
             eachPost.$id !== slug
         ))
         state.allPosts= updatedPosts
+        console.log('post deleted from the store');
+        
     }
   },
 });

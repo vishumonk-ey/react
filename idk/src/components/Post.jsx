@@ -3,13 +3,16 @@ import {Container} from "./index";
 import {Button} from "./index";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import databaseService from "../appwrite/databaseService";
 import parse from "html-react-parser";
+import { deletePost } from "../store/postSlice";
 function Post() {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const navigate = useNavigate();
+  // const allPosts = useSelector((state) => state.allPosts)
+  const dispatch = useDispatch()
   // let authorId;
   useEffect(() => {
     databaseService
@@ -37,9 +40,11 @@ function Post() {
  }
   const handleDelete = async () => {
     try {
+      // console.log("post",post); 
       const status = await databaseService.deletePost(slug);
       if (status) {
-        const fileDelStatus = await databaseService.deleteFile(post.fileId);
+        const fileDelStatus = await databaseService.deleteFile(post.imageId);
+        dispatch(deletePost(slug))
         fileDelStatus && navigate("/");
       }
     } catch (error) {

@@ -1,9 +1,9 @@
-import { Client, Databases, ID, Role, Storage } from "appwrite";
+import { Client, Databases, ID, Role, Storage, Permission } from "appwrite";
 import { config } from "../assets/config";
 class DatabaseService {
   client = new Client()
-      .setProject(config.appwriteProjectId)
-      .setEndpoint(config.appwriteUrl);
+    .setProject(config.appwriteProjectId)
+    .setEndpoint(config.appwriteUrl);
   database;
   storage;
   constructor() {
@@ -74,8 +74,10 @@ class DatabaseService {
       return await this.storage.createFile(
         config.appwriteBucketId,
         ID.unique(),
-        file ,
+        file,
         [
+          Permission.read(Role.any()),
+          // Permission.write(Role.user(currentUserId)),
         ]
       );
     } catch (error) {

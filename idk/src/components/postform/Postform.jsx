@@ -27,38 +27,46 @@ function Postform({ post }) {
   const submit = async (data) => {
     // console.log(data);
     // console.log("pot : "s,post);
+    console.log("running");
     
     if (post) {
+      console.log("first one ran");
+      
       const newImage = data.image[0]
         ? await databaseService.uploadFile(data.image[0])
         : null;
       if (newImage) {
         await databaseService.deleteFile(post.imageId);
-        //  const updatedPost = await databaseService.updatePost({
-        //      ...data,
-        //      imageId: newImage.$id } , post.$id
-        //     );
+        const updatedPost = await databaseService.updatePost({
+             ...data,
+             imageId: newImage.$id } , post.$id
+            );
+        if(updatedPost){
+          navigate('/posts/${updatedPost.$id}')
+        }else{
+          navigate('/')
+        }
         // slug isnt changing so deleting the old and creating new with same data
       }
-      const deleteOldPost = await databaseService.deletePost(post.$id);
-      if (deleteOldPost) {
-        const newPost = await databaseService.createPost(
-          {
-            ...data,
-            imageId: newImage.$id || data.imageId,
-            authorId: userData.$id,
-          },
-          data.slug
-        );
-        if (newPost) {
-          // addPosts()
-          dispatch(updatePosts({
-            slugForDelete : post.$id ,
-            newPost
-          }))
-          navigate(`/posts/${newPost.$id}`);
-        }
-      }
+      // const deleteOldPost = await databaseService.deletePost(post.$id);
+      // if (deleteOldPost) {
+      //   const newPost = await databaseService.createPost(
+      //     {
+      //       ...data,
+      //       imageId: newImage.$id || data.imageId,
+      //       authorId: userData.$id,
+      //     },
+      //     data.slug
+      //   );
+      //   if (newPost) {
+      //     // addPosts()
+      //     dispatch(updatePosts({
+      //       slugForDelete : post.$id ,
+      //       newPost
+      //     }))
+      //     navigate(`/posts/${newPost.$id}`);
+      //   }
+      // }
     } else {
       const image = await databaseService.uploadFile(data.image[0]);
       const newPost = await databaseService.createPost(
@@ -69,6 +77,9 @@ function Postform({ post }) {
         },
         data.slug
       );
+      console.log(`data : ${data} , imageId : ${image.$id}` )
+      console.log("ran");
+      
       if (newPost){
         dispatch(addPosts([...storedPosts , newPost]))
         navigate(`/posts/${newPost.$id}`)
@@ -118,7 +129,7 @@ function Postform({ post }) {
             placeholder="Upload File"
             className={"mb-4"}
             {...register("image", {
-              required: true,
+              required: !post,
             })}
           />
           {post && (
