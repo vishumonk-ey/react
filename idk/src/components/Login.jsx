@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { login as authlogin } from "../store/authSlice";
-import {Logo} from "../components/index";
+import { Logo } from "../components/index";
 import { Input } from "../components/index";
-import {Button} from "../components/index"
+import { Button } from "../components/index";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 function Login() {
@@ -13,7 +13,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const login = async (data) => {
@@ -23,15 +23,13 @@ function Login() {
       if (sessionInfo) {
         // dispatch(authlogin(loggedInUserData));
         // navigate("/")
-        const userData = await authService.getCurrentuser()
+        const userData = await authService.getCurrentuser();
         if (userData) {
-          dispatch(authlogin(userData))
-          navigate("/")
+          dispatch(authlogin(userData));
+          navigate("/");
         }
-
       }
     } catch (error) {
-      console.log("error in logging in", error);
       setError(error);
     }
   };
@@ -68,7 +66,7 @@ function Login() {
                   required: true,
                   // validate ---> yaha pattern matching karva dena last me ..
                 })}
-                // register returns an object with name , onChange , onBlur event listener and it is spreaded to pass on to our input component 
+                // register returns an object with name , onChange , onBlur event listener and it is spreaded to pass on to our input component
               />
               {errors.email && (
                 <p className="text-red-600 text-center">{error.email}</p>

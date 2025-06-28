@@ -15,7 +15,7 @@ function Logout() {
         navigate("/");
       }
     } catch (err) {
-      console.log("Logging out error", err);
+      // Error handling for logging out
     }
   };
   return (

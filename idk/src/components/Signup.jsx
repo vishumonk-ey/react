@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { login as authlogin } from "../store/authSlice";
-import {Logo} from "../components/index";
+import { Logo } from "../components/index";
 import { Input } from "../components/index";
-import {Button} from "../components/index"
+import { Button } from "../components/index";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 function SignUp() {
@@ -15,17 +15,16 @@ function SignUp() {
   } = useForm();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const signup = async (data) => {
     setError("");
     try {
       const loggedInUserData = await authService.signUp(data);
       if (loggedInUserData) {
         dispatch(authlogin(loggedInUserData));
-        navigate("/")
+        navigate("/");
       }
     } catch (error) {
-      console.log("error in signup in", error);
       setError(error);
     }
   };
@@ -55,11 +54,16 @@ function SignUp() {
         <form onSubmit={handleSubmit(signup)}>
           <div className="space-y-3">
             <div className="space-y-2">
-                <Input placeholder="Name" label="Name : "
-                {...register("name",{
-                    required : true
-                })}/>
-                {errors.name && <p className="text-red-600 mt-8 text-center">{errors.name}</p>}
+              <Input
+                placeholder="Name"
+                label="Name : "
+                {...register("name", {
+                  required: true,
+                })}
+              />
+              {errors.name && (
+                <p className="text-red-600 mt-8 text-center">{errors.name}</p>
+              )}
             </div>
             <div className="space-y-2">
               <Input

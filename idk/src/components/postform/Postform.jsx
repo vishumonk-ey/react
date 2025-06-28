@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {RTE} from "../index";
-import {Input} from "../index";
-import {Button} from "../index";
-import {Container} from "../index";
+import { RTE } from "../index";
+import { Input } from "../index";
+import { Button } from "../index";
+import { Container } from "../index";
 import { useForm } from "react-hook-form";
 import databaseService from "../../appwrite/databaseService";
-import {addPosts,deletePost,updatePosts} from "../../store/postSlice";
+import { addPosts, deletePost, updatePosts } from "../../store/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 function Postform({ post }) {
@@ -13,40 +13,48 @@ function Postform({ post }) {
     useForm({
       defaultValues: {
         title: post?.title || "",
-        content: post?.content || "Write your text here...",
+        content: post?.content,
         imageId: post?.imageId || "",
         slug: post?.$id || "",
       },
     });
   const navigate = useNavigate();
-  console.log(useSelector((state)=>state));
-  const storedPosts = useSelector((state) => state.posts.allPosts)
+  const storedPosts = useSelector((state) => state.posts.allPosts);
   const userData = useSelector((state) => state.auth.userData);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // const [slug, setSlug] = useState("");
   const submit = async (data) => {
-    // console.log(data);
-    // console.log("pot : "s,post);
-    console.log("running");
-    
     if (post) {
-      console.log("first one ran");
-      
       const newImage = data.image[0]
         ? await databaseService.uploadFile(data.image[0])
         : null;
       if (newImage) {
         await databaseService.deleteFile(post.imageId);
-        const updatedPost = await databaseService.updatePost({
-             ...data,
-             imageId: newImage.$id } , post.$id
-            );
-        if(updatedPost){
-          navigate('/posts/${updatedPost.$id}')
-        }else{
-          navigate('/')
-        }
+        // const updatedPost = await databaseService.updatePost(
+        //   {
+        //     ...data,
+        //     imageId: newImage.$id,
+        //   },
+        //   post.$id
+        // );
+        // if (updatedPost) {
+        //   navigate("/posts/${updatedPost.$id}");
+        // } else {
+        //   navigate("/");
+        // }
         // slug isnt changing so deleting the old and creating new with same data
+      }
+      const updatedPost = await databaseService.updatePost(
+        {
+          ...data,
+          imageId: newImage?.$id || data.imageId,
+        },
+        post.$id
+      );
+      if (updatedPost) {
+        navigate(`/posts/${updatedPost.$id}`);
+      } else {
+        navigate("/");
       }
       // const deleteOldPost = await databaseService.deletePost(post.$id);
       // if (deleteOldPost) {
@@ -77,12 +85,10 @@ function Postform({ post }) {
         },
         data.slug
       );
-      console.log(`data : ${data} , imageId : ${image.$id}` )
-      console.log("ran");
-      
-      if (newPost){
-        dispatch(addPosts([...storedPosts , newPost]))
-        navigate(`/posts/${newPost.$id}`)
+
+      if (newPost) {
+        dispatch(addPosts([...storedPosts, newPost]));
+        navigate(`/posts/${newPost.$id}`);
       }
     }
   };
@@ -93,20 +99,19 @@ function Postform({ post }) {
       .replace(/[^\w\s-]/g, "") // Remove special characters except spaces and hyphens
       .replace(/[\s_]+/g, "-") // Replace spaces and underscores with hyphens
       .replace(/^-+|-+$/g, ""); // Remove leading and trailing hyphens
-    console.log(slug);
-    
+
     return slug;
   }, []);
-  useEffect(()=>{
-    const subscription = watch((value , {name})=>{
-        if (name === "title"){
-          setValue("slug",slugTransform(value.title))
-        }
-    })
-    return () => subscription.unsubscribe()
-  },
-  []) 
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === "title") {
+        setValue("slug", slugTransform(value.title));
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, []);
   // my useEffect will run once when the component mounts , and it is continously watching until my component unmounts , we can only return a function in useEffect which will run when useEffect runs again or component unmounts.
+
   return (
     <Container>
       <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
@@ -118,9 +123,8 @@ function Postform({ post }) {
             {...register("title", {
               required: true,
             })}
-            
           />
-          <RTE control={control} defaultValues={getValues("content")} />
+          <RTE control={control} defaultValue={getValues("content")} />
         </div>
         <div className="w-1/3 px-2 space">
           <Input

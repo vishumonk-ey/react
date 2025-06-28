@@ -27,16 +27,15 @@ function App() {
               dispatch(addPosts(fetchedPosts.documents));
             })
             .catch((errr) => {
-              console.log(errr);
+              // Error handling for fetching posts
             });
         } else {
           dispatch(logout());
         }
-        // console.log(userdata);
       })
-      .catch((err) =>
-        console.log("error in getting user or no session exists yet", err)
-      )
+      .catch((err) => {
+        // Error handling for getting user or no session exists yet
+      })
       .finally(() => setLoading(false));
   }, []);
   // userData isliye le rhe hain because whenever i will refresh my page then my page will start from scratch and store data will be reinitialized as it is stored in memory , app will run again and will fetch the userData and store it in the store , which can be further used by my pages.

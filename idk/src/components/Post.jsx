@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {Container} from "./index";
-import {Button} from "./index";
+import { Container } from "./index";
+import { Button } from "./index";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,46 +9,42 @@ import parse from "html-react-parser";
 import { deletePost } from "../store/postSlice";
 function Post() {
   const { slug } = useParams();
+
   const [post, setPost] = useState(null);
   const navigate = useNavigate();
   // const allPosts = useSelector((state) => state.allPosts)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // let authorId;
   useEffect(() => {
     databaseService
       .getPost(slug)
       .then((resolvedPost) => {
-        resolvedPost ? setPost((resolvedPost)) : navigate("/");
-        console.log("my Post :" ,resolvedPost);
-        
+        resolvedPost ? setPost(resolvedPost) : navigate("/");
+
         // authorId = post.authorId;
       })
       .catch((err) => {
-        console.log("error in fetching post in post", err);
         navigate("/");
       });
   }, [slug, navigate]);
   const userData = useSelector((state) => state.auth.userData);
- let isAuthor;
- //console.log("userData : " ,userData);
- if(post && userData){
-    if ( userData.$id === post.authorId) {
-      isAuthor = true
+  let isAuthor;
+  if (post && userData) {
+    if (userData.$id === post.authorId) {
+      isAuthor = true;
     } else {
-      isAuthor = false
+      isAuthor = false;
     }
- }
+  }
   const handleDelete = async () => {
     try {
-      // console.log("post",post); 
       const status = await databaseService.deletePost(slug);
       if (status) {
         const fileDelStatus = await databaseService.deleteFile(post.imageId);
-        dispatch(deletePost(slug))
+        dispatch(deletePost(slug));
         fileDelStatus && navigate("/");
       }
     } catch (error) {
-      console.log("error in deleting post", error);
       navigate("/");
     }
   };

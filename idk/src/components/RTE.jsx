@@ -16,7 +16,7 @@ function RTE({
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
-            apiKey= {config.tinyMceKey}
+            apiKey={config.tinyMceKey}
             initialValue={defaultValue}
             init={{
               initialValue: defaultValue,
