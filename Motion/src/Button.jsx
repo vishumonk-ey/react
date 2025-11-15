@@ -16,7 +16,7 @@ function Button() {
           rotateX : 20,
           // translateX : -5 ,
           translateY : -5 ,
-          boxShadow : "0px 0px 2px 5px rgba(255,255,255,0.3)"  ,
+          // boxShadow : "0px 0px 2px 5px rgba(255,255,255,0.3)"  ,
           boxShadow : "0px 20px 50px rgba(255,255,255,0.3)"  ,
           // rotateY : 20,
           // rotateZ: 20

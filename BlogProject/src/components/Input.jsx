@@ -6,7 +6,7 @@ import React, { forwardRef, useId } from "react";
 // i could've focused the input without using this by giving some specific id to the input box and apply focus class on it when clicked on a btn , but 
 //  i would have to access that by document.getElementById("my-specific-id") which will search throughout the document but in case of useRef it gives me the direct access to that dom element
 // forwardRef is used for transferring the reference
-const Input = forwardRef(
+const Input   = forwardRef(
   ({ label, placeholder, type = "text", className = "", ...props },ref) => {
     console.log("this is my ref",ref);
     
