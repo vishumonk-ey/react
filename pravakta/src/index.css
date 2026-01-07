@@ -1,0 +1,8 @@
+@font-face{
+    font-family: Levenim;
+    src: url('../src/assets/fonts/Levenim_MT_Regular.ttf');
+}
+@import "tailwindcss";
+@theme{
+    --font-Levenim : Levenim, "sans-serif";
+}
