@@ -28,6 +28,7 @@ app.get(
   //     message: "Server is running",
   //   })
 );
-app.listen(port, () => {
-  console.log("server is running live on : ", port);
-});
+// app.listen(port, () => {
+//   console.log("server is running live on : ", port);
+// });
+export default app
