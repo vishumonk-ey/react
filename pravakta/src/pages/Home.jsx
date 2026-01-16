@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, OurServicesCard } from "../components/index";
 // import { title } from "motion/react-client";
 // import {Logo} from '../assets/Logo.jpg'
@@ -58,7 +58,7 @@ function Home() {
       text: "With rising commercial complexities, arbitration and conciliation have become essential alternatives to litigation. We represent clients in domestic and institutional arbitrations, guiding them through drafting arbitration clauses, initiating proceedings, and ensuring effective resolution of disputes in a time-bound manner.",
     },
   ];
-
+  const [isModalOpen ,setisModalOpen] = useState(false)
   return (
     <div className="font-Levenim bg-[#F8F6F1] w-full space-y-6">
       <div className="first-page flex flex-col md:flex-row-reverse min-h-screen">
@@ -232,6 +232,7 @@ function Home() {
           </div>
         </div>
       </div>
+      {/* <div className="absolute">heyyy</div> */}
     </div>
   );
 }
