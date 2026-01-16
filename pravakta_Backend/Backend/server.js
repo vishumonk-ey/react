@@ -1,20 +1,29 @@
 import express from "express";
-import { sendEmail } from "./emailController.js";
 import cors from "cors";
-// import { methods } from './emailController'
+// import sendEmail from "./EmailSender.js";
+import { sendUserEmail , sendClientEmail } from "./EmailSender.js";
 import "dotenv/config";
-const app = express(); 
-app.use(cors()); 
-app.use(express.json()); 
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-// app.use((req, res, next) => {
-//   console.log("backend!", req.method, req.path);
-//   next(); // Important: call next() to pass control to the next middleware/route
-// });
+const PORT = process.env.PORT;
 
-const port = process.env.PORT;
+app.post("/api/sendEmail", async (req, res) => {
+  const { userEmail , userName , contactNo , Query } = req.body;
+  try {
+    // await sendEmail(userEmail);
+    // const [result1 , result2] = await Promise.all([sendUserEmail(userEmail) ,sendClientEmail(userName , userEmail , contactNo , Query)] )
+    const data = await sendUserEmail(userEmail)
+    console.log("data:" ,data);
+    
+    res.json({message: "Mail send succesfully!"})
 
-app.post("/api/sendEmail", sendEmail);
+  } catch (error) {
+    console.log("Failed to send email", error)
+ }
+  
+});
 
 app.get(
   "/api/health",
@@ -28,7 +37,6 @@ app.get(
   //     message: "Server is running",
   //   })
 );
-// app.listen(port, () => {
-//   console.log("server is running live on : ", port);
-// });
-export default app
+app.listen(PORT, () => {
+  console.log("server is running live on : ", PORT);
+});
