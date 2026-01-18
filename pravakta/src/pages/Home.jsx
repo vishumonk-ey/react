@@ -132,7 +132,7 @@ function Home() {
             compliance work, our approach is always tailored to the client's
             unique needs.
           </p>
-          <Button className="px-1 mt-10 ">BOOK A CONSULTATION</Button>
+          <Button className="px-1 mt-10 " onClick = {()=>{setisModalOpen(true)}}>BOOK A CONSULTATION</Button>
         </div>
       </div>
       <div className="third-page md:min-h-screen mt-20 w-full">
@@ -226,7 +226,7 @@ function Home() {
                 International School, Gokul Township, Virar West ,Palghar-401303 
               </p>
             </div>
-            <Button className="mt-10 w-full bg-[#303030]">
+            <Button className="mt-10 w-full bg-[#303030]" onClick = {()=>{setisModalOpen(true)}}>
               BOOK A CONSULTATION
             </Button>
           </div>
