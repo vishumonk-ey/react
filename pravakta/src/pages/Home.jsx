@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Card, OurServicesCard } from "../components/index";
+import Modal from "../components/Modal";
 // import { title } from "motion/react-client";
 // import {Logo} from '../assets/Logo.jpg'
 function Home() {
@@ -58,7 +59,15 @@ function Home() {
       text: "With rising commercial complexities, arbitration and conciliation have become essential alternatives to litigation. We represent clients in domestic and institutional arbitrations, guiding them through drafting arbitration clauses, initiating proceedings, and ensuring effective resolution of disputes in a time-bound manner.",
     },
   ];
-  const [isModalOpen ,setisModalOpen] = useState(false)
+  const [isModalOpen, setisModalOpen] = useState(false);
+  useEffect(() => {
+    console.log("ran : ", isModalOpen);
+    if (!isModalOpen) {
+      document.body.classList.remove("overflow-hidden");
+    } else {
+      document.body.classList.add("overflow-hidden");
+    }
+  }, [isModalOpen]);
   return (
     <div className="font-Levenim bg-[#F8F6F1] w-full space-y-6">
       <div className="first-page flex flex-col md:flex-row-reverse min-h-screen">
@@ -99,7 +108,13 @@ function Home() {
             </p>
             {/* TODO: add onclick for btn */}
             <div className="w-full flex justify-center">
-              <Button className="px-12">LEARN MORE</Button>
+              {/* LEARN MORE */}
+              <a
+                href="#third-page"
+                className="px-8 py-4 rounded-sm bg-[#605047] duration-300 ease-in-out transition-all hover:bg-[#766358] cursor-pointer text-white"
+              >
+                Learn More
+              </a>
             </div>
           </div>
         </div>
@@ -132,10 +147,17 @@ function Home() {
             compliance work, our approach is always tailored to the client's
             unique needs.
           </p>
-          <Button className="px-1 mt-10 " onClick = {()=>{setisModalOpen(true)}}>BOOK A CONSULTATION</Button>
+          <Button
+            className="px-1 mt-10 "
+            onClick={() => {
+              setisModalOpen(true);
+            }}
+          >
+            BOOK A CONSULTATION
+          </Button>
         </div>
       </div>
-      <div className="third-page md:min-h-screen mt-20 w-full">
+      <div className="third-page md:min-h-screen mt-20 w-full" id="third-page">
         <h1 className="text-3xl font-extrabold text-[#605047] text-center block my-3">
           OUR NETWORK PARTNERS
         </h1>
@@ -223,16 +245,23 @@ function Home() {
               <p className="font-semibold">Office :</p>
               <p className="tracking-wide text-justify">
                 Office No. 9, Gokul Sapphire, Besides Muljibai Mehta
-                International School, Gokul Township, Virar West ,Palghar-401303 
+                International School, Gokul Township, Virar West ,Palghar-401303
               </p>
             </div>
-            <Button className="mt-10 w-full bg-[#303030]" onClick = {()=>{setisModalOpen(true)}}>
+            <Button
+              className="mt-10 w-full bg-[#303030]"
+              onClick={() => {
+                setisModalOpen(true);
+              }}
+            >
               BOOK A CONSULTATION
             </Button>
           </div>
         </div>
       </div>
-      {/* <div className="absolute">heyyy</div> */}
+      {isModalOpen && (
+        <Modal isModalOpen={isModalOpen} setisModalOpen={setisModalOpen} />
+      )}
     </div>
   );
 }

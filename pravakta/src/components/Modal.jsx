@@ -1,12 +1,27 @@
 import { Cross, X } from "lucide";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Modal({ isModalOpen, setisModalOpen }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [contactNo, setContactNo] = useState("");
   const [query, setQuery] = useState("");
+  // useEffect(() => {
+  //   console.log("ran : ", isModalOpen);
+  //   if (!isModalOpen) {
+  //     document.body.classList.remove("overflow-hidden");
+  //   } else {
+  //     document.body.classList.add("overflow-hidden");
+  //   }
+  //   return ()=>{
+  //     console.log("Ran : " , isModalOpen);
+      
+  //       document.body.classList.remove("overflow-hidden");
+  //   }
+  // }, [isModalOpen]);
   // const [isError, setisError] = useState({
   //   userEmail: false,
   //   contactNo: false,
@@ -52,12 +67,16 @@ function Modal({ isModalOpen, setisModalOpen }) {
         }
         const status = await res.json();
         if (status) {
-          addToast({
-            title: "Consultation booked",
-            description: "We will shortly contact you ! ",
-            color: "success",
+          toast.success("Consultation Booked!", {
+            position: "top-right",
+            autoClose: 3000, // Closes after 3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
           });
-          setisModalOpen(false);
           return;
         } else {
           addToast({
@@ -82,25 +101,25 @@ function Modal({ isModalOpen, setisModalOpen }) {
   };
   return (
     <div
-      className="absolute inset-0 flex justify-center items-center  bg-gray-500"
+      className="fixed inset-0 flex justify-center items-center backdrop-blur-sm p-5 overflow-y-auto shadow-xl shadow-black border border-black"
       onClick={() => setisModalOpen(!isModalOpen)}
     >
       <div
-        className="w-full max-w-sm rounded-md bg-white px-3 py-4 absolute"
+        className="w-full max-w-md rounded-md bg-white p-6 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
-          <h1 className="font-semibold">Enter Details </h1>
+          <h1 className="font-semibold text-xl">Enter Details </h1>
           <button
-            className="p-2 rounded-lg hover:bg-[#E5E7EB] duration-300 ease-in-out"
+            className="px-4 py-1 rounded-lg hover:bg-[#E5E7EB] duration-300 ease-in-out"
             onClick={() => setisModalOpen(false)}
           >
-            <X className=" size-5" />
+            {/* <X className="size-5"/> */}x
           </button>
         </div>
-        <p className="w-full h-[1px] bg-[#E5E7EB]"></p>
+        <p className="w-full h-[1px] bg-[#E5E7EB] my-5"></p>
         {/* input section */}
-        <div className="w-full space-y-2">
+        <div className="w-full space-y-4">
           <Input
             id="userName"
             label="Name"
@@ -118,21 +137,26 @@ function Modal({ isModalOpen, setisModalOpen }) {
           <Input
             id="contactNo"
             label="Contact No"
-            placeholder=""
+            placeholder="1234567689"
             value={contactNo}
             setValue={setContactNo}
           />
           <Input
             id="Query"
             label="Query"
-            placeholder="Enter your query here ..."
+            placeholder="Enter your query here . ."
             value={query}
             setValue={setQuery}
           />
         </div>
-        <Button onClick={() => {
-          sendConsultation(userName , userEmail , contactNo ,query)
-        }}>Confirm consultation</Button>
+        <Button
+          onClick={() => {
+            sendConsultation(userName, userEmail, contactNo, query);
+          }}
+          className="mt-10"
+        >
+          Submit
+        </Button>
       </div>
     </div>
   );
