@@ -2,13 +2,18 @@ import { Cross, X } from "lucide";
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast} from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 function Modal({ isModalOpen, setisModalOpen }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [contactNo, setContactNo] = useState("");
   const [query, setQuery] = useState("");
+  // const [formData , setFormData] = useState({
+  //   userName : '' ,
+  //   userEmail ; ''
+  // })
   // useEffect(() => {
   //   console.log("ran : ", isModalOpen);
   //   if (!isModalOpen) {
@@ -30,12 +35,23 @@ function Modal({ isModalOpen, setisModalOpen }) {
     try {
       const emailRe = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       const contactNoRe = /^[6-9]\d{9}$/;
+      // toast.error("Error" , 
+      //   {
+      //     position: "top-right",
+      //     autoClose: 3000,
+      //     hideProgressBar: false,
+      //     closeOnClick: true,
+      //     // pauseOnHover: true,
+      //     draggable: true
+      //   }
+      // )
       if (!emailRe.test(userEmail)) {
-        addToast({
-          title: "Incorrect Email",
-          description: "Please enter valid email",
-          color: "danger",
-        });
+        // addToast({
+        //   title: "Incorrect Email",
+        //   description: "Please enter valid email",
+        //   color: "danger",
+        // });
+        throw "Enter valid mail"
       } else if (!contactNoRe.test(contactNo)) {
         addToast({
           title: "Invalid Number",
@@ -90,18 +106,18 @@ function Modal({ isModalOpen, setisModalOpen }) {
       }
     } catch (error) {
       console.log("Error occured while sending the mail !", error);
-      addToast({
-        title: "Something went wrong",
-        description: "Please try again later",
-        color: "danger",
-      });
+      // addToast({
+      //   title: "Something went wrong",
+      //   description: "Please try again later",
+      //   color: "danger",
+      // });
       setisModalOpen(false);
       return;
     }
   };
   return (
     <div
-      className="fixed inset-0 flex justify-center items-center backdrop-blur-sm p-5 overflow-y-auto shadow-xl shadow-black border border-black"
+      className="fixed inset-0 flex justify-center items-center backdrop-blur-sm p-5 shadow-xl shadow-black border border-black overflow-x-hidden"
       onClick={() => setisModalOpen(!isModalOpen)}
     >
       <div
@@ -158,6 +174,7 @@ function Modal({ isModalOpen, setisModalOpen }) {
           Submit
         </Button>
       </div>
+      <ToastContainer/>
     </div>
   );
 }
