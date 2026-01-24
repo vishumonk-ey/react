@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, OurServicesCard } from "../components/index";
 import Modal from "../components/Modal";
+import spire from '../assets/spire.jpeg'
+import drishtency from '../assets/drishtency.jpg'
+import netra from '../assets/netra.jpeg'
+import arkroot from '../assets/arkroot.jpeg'
+import logo from '../assets/pravakta_logo_updated.png'
 // import { title } from "motion/react-client";
 // import {Logo} from '../assets/Logo.jpg'
 function Home() {
@@ -8,7 +13,7 @@ function Home() {
     {
       company: "ARK ROOT FINANCIAL SERVICES",
       text: "is a trusted name in the field of finance, investment, and business consultancy.",
-      img: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      img: arkroot,
     },
     {
       company: "NIDE DESIGN STUDIO",
@@ -18,19 +23,19 @@ function Home() {
     {
       company: "SPIRE RISK ADVISORS LLP",
       text: "is a management consulting and risk advisory consultancy offering a comprehensive range of services spanning audit, taxation, corporate law, risk management, and internal controls.",
-      img: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      img: spire,
     },
   ];
   const networkPartnersTwo = [
     {
       company: "DRISHTIENCY",
       text: "is a creative agency that blends design, strategy, and storytelling to help brands communicate with impact. Specializing in branding, digital design, and marketing solutions, it works with professionals, businesses, and startups to build strong and meaningful brand identities.",
-      img: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      img: drishtency,
     },
     {
       company: "NETRA REALTY SOLUTIONS PVT. LTD.",
       text: "is a professional real estate consultancy specializing in property transactions, redevelopment advisory, and real estate management services.",
-      img: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      img: netra,
     },
   ];
   const servicePartner = [
@@ -76,11 +81,11 @@ function Home() {
           {/* Logo */}
           <div>
             <img
-              src="https://images.unsplash.com/photo-1602934445884-da0fa1c9d3b3?q=80&w=958&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src={logo}
               alt="Pravakta Legal Associates"
-              className="size-50 mx-auto"
+              className="w-80 h-60 mx-auto object-cover object-center"
             />
-            <h1 className="font-[1000] text-3xl mt-8 text-[#605047] inline-block text-center">
+            <h1 className="font-[1000] text-3xl text-[#605047] inline-block text-center">
               PRAVAKTA LEGAL ASSOCIATES
             </h1>
           </div>
@@ -91,9 +96,9 @@ function Home() {
             {/* logo */}
             <div className="w-full flex flex-col items-center">
               <img
-                src="https://images.unsplash.com/photo-1602934445884-da0fa1c9d3b3?q=80&w=958&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={logo}
                 alt="Pravakta Legal Associates"
-                className="size-15"
+                className="h-18 w-25 object-cover object-center"
               />
               <h1 className="font-normal text-lg mt-1.5 text-[#615148]">
                 PRAVAKTA LEGAL ASSOCIATES
@@ -121,11 +126,11 @@ function Home() {
       </div>
       <div className="second-page md:min-h-screen p-4 flex flex-col md:flex-row">
         {/* Handshake image */}
-        <div className=" w-full md:w-1/2 ">
+        <div className=" w-full md:w-1/2 flex justify-center items-center">
           <img
             src="https://images.unsplash.com/photo-1672380135241-c024f7fbfa13?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=" handshake image"
-            className="h-full w-full rounded-sm"
+            className="max-h-full max-w-full rounded-sm"
           />
         </div>
         <div className="md:p-20 md:w-1/2 space-y-6 mt-20 md:mt-0 md:space-y-8">
@@ -191,15 +196,15 @@ function Home() {
           </h1>
           <div className="py-10">
             <img
-              src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://images.pexels.com/photos/7875839/pexels-photo-7875839.jpeg"
               alt="law"
-              className="h-50 w-80 rounded-sm"
+              className="h-50 w-80 rounded-sm object-cover"
             />
 
             <img
-              src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://images.pexels.com/photos/7876050/pexels-photo-7876050.jpeg"
               alt="law"
-              className="h-50 w-80 rounded-sm mt-18"
+              className="h-50 w-80 rounded-sm mt-18 object-cover"
             />
           </div>
         </div>
@@ -220,7 +225,7 @@ function Home() {
         <img
           src="https://images.unsplash.com/photo-1562564055-71e051d33c19?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Pravakta legal associates"
-          className="w-full md:w-1/2"
+          className="w-full md:w-1/2 object-cover object-left rounded-sm"
         />
         <div className="flex w-full md:w-1/2 items-center justify-center py-10 px-3 md:px-0 md:py-0">
           <div className="w-full max-w-[350px] text-[#303030] space-y-8">

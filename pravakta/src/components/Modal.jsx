@@ -2,9 +2,9 @@ import { Cross, X } from "lucide";
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
-import { ToastContainer, toast} from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 function Modal({ isModalOpen, setisModalOpen }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -23,7 +23,7 @@ function Modal({ isModalOpen, setisModalOpen }) {
   //   }
   //   return ()=>{
   //     console.log("Ran : " , isModalOpen);
-      
+
   //       document.body.classList.remove("overflow-hidden");
   //   }
   // }, [isModalOpen]);
@@ -35,73 +35,103 @@ function Modal({ isModalOpen, setisModalOpen }) {
     try {
       const emailRe = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       const contactNoRe = /^[6-9]\d{9}$/;
-      // toast.error("Error" , 
-      //   {
-      //     position: "top-right",
-      //     autoClose: 3000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     // pauseOnHover: true,
-      //     draggable: true
-      //   }
-      // )
-      if (!emailRe.test(userEmail)) {
-        // addToast({
-        //   title: "Incorrect Email",
-        //   description: "Please enter valid email",
-        //   color: "danger",
-        // });
-        throw "Enter valid mail"
-      } else if (!contactNoRe.test(contactNo)) {
-        addToast({
-          title: "Invalid Number",
-          description: "Please enter valid number",
-          color: "danger",
+      if (!userName.trim()) {
+        toast.error("Please enter username", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+        });
+      } else if (!userEmail.trim()) {
+        toast.error("Please enter user email", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+        });
+      } else if (!contactNo.trim()) {
+        toast.error("Please enter contact number", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
         });
       } else {
-        const data = {
-          userEmail,
-          userName,
-          contactNo,
-          query,
-        };
-        const res = await fetch("", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }); //TODO:add URL , will return true or false
-        if (!res.ok) {
-          addToast({
-            title: "Something went wrong",
-            description: "Please try again later",
-            color: "danger",
-          });
-          setisModalOpen(false);
-          return;
-        }
-        const status = await res.json();
-        if (status) {
-          toast.success("Consultation Booked!", {
+        if (!emailRe.test(userEmail)) {
+          toast.error("Please enter valid email", {
             position: "top-right",
-            autoClose: 3000, // Closes after 3 seconds
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
+            pauseOnHover: false,
+            draggable: false,
           });
-          return;
+        } else if (!contactNoRe.test(contactNo)) {
+          toast.error("Please enter valid contact number", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+          });
         } else {
-          addToast({
-            title: "Something went wrong",
-            description: "Please try again later",
-            color: "danger",
-          });
-          setisModalOpen(false);
-          return;
+          const data = {
+            userEmail,
+            userName,
+            contactNo,
+            query,
+          };
+          const res = await fetch("", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }); //TODO:add URL , will return true or false
+          if (!res.ok) {
+            toast.error("Something went wrong", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: false,
+            });
+            setisModalOpen(false);
+            return;
+          }
+          const status = await res.json();
+          if (status) {
+            toast.success("Consultation Booked!", {
+              position: "top-right",
+              autoClose: 3000, // Closes after 3 seconds
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            return;
+          } else {
+            toast.error("Something went wrong", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: false,
+            });
+            setisModalOpen(false);
+            return;
+          }
         }
       }
     } catch (error) {
@@ -174,7 +204,7 @@ function Modal({ isModalOpen, setisModalOpen }) {
           Submit
         </Button>
       </div>
-      <ToastContainer/>
+      <ToastContainer className="w-20" />
     </div>
   );
 }

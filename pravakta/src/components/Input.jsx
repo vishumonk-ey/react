@@ -12,6 +12,7 @@ function input({ value, setValue, placeholder, label, id }) {
         className="rounded-md bg-[#F9FAFB] w-full px-4 mt-1 py-2"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        // autoComplete= "off"
         // pattern="^\d+$"
       />
     </div>
