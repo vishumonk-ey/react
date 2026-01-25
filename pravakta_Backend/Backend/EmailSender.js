@@ -5,10 +5,11 @@ const resend = new Resend(process.env.RESEND_KEY);
 const sendUserEmail = async (userEmail) => {
   try {
     const { data, error } = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "bookings@pravaktalegal.com",
       to: userEmail,
-      subject: "Mail from Resend",
-      html: "<strong>It works!</strong>",
+      subject: "Consultation has been booked !",
+      html: "<strong>Hey , your consultation is successfully booked . </strong>",
+      replyTo : "mansi@pravaktalegal.com"
     });
     return data;
   } catch (error) {
