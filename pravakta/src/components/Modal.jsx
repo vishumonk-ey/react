@@ -3,34 +3,22 @@ import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
-
+import { useIsPresent, motion } from "framer-motion";
 // import "react-toastify/dist/ReactToastify.css";
 function Modal({ isModalOpen, setisModalOpen }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [contactNo, setContactNo] = useState("");
   const [query, setQuery] = useState("");
-  // const [formData , setFormData] = useState({
-  //   userName : '' ,
-  //   userEmail ; ''
-  // })
-  // useEffect(() => {
-  //   console.log("ran : ", isModalOpen);
-  //   if (!isModalOpen) {
-  //     document.body.classList.remove("overflow-hidden");
-  //   } else {
-  //     document.body.classList.add("overflow-hidden");
+  const isPresent = useIsPresent()
+  console.log("isPresent : " , isPresent);
+  // useEffect(()=>{
+  //   if(isPresent){
+  //     document.body.classList.add("overflow-hidden")
+  //   }else{
+  //     document.body.classList.remove("overflow-hidden")
   //   }
-  //   return ()=>{
-  //     console.log("Ran : " , isModalOpen);
-
-  //       document.body.classList.remove("overflow-hidden");
-  //   }
-  // }, [isModalOpen]);
-  // const [isError, setisError] = useState({
-  //   userEmail: false,
-  //   contactNo: false,
-  // });
+  // }, [isPresent])
   const sendConsultation = async (userName, userEmail, contactNo, query) => {
     try {
       const emailRe = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -146,11 +134,47 @@ function Modal({ isModalOpen, setisModalOpen }) {
     }
   };
   return (
-    <div
-      className="fixed inset-0 flex justify-center items-center backdrop-blur-sm p-5 shadow-xl shadow-black border border-black overflow-x-hidden"
+    <motion.div
+      className="fixed inset-0 flex justify-center items-center backdrop-blur-sm p-5 "
       onClick={() => setisModalOpen(!isModalOpen)}
+      initial = {{
+        scale : 0.98,
+        filter : "blur(10px)" , 
+        opacity : 0
+      }}
+      animate = {{
+        scale : 1 ,
+        filter : "blur(0px)" ,
+         opacity : 1
+      }}
+      transition={{
+        duration : 0.5 ,
+        ease : "easeInOut" ,
+      }}
+      exit={{
+        scale : 0.98 , 
+        filter : "blur(10px)" ,
+        opacity : 0
+      }}
     >
-      <div
+      <motion.div
+        initial={{
+          scale: 0,
+          opacity: 0,
+        }}
+        animate={{
+          scale: 1,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.5,
+          ease: "easeInOut",
+          scale: { type: "spring", visualDuration: 0.5, bounce: 0.35 },
+        }}
+        exit={{
+          scale: 0,
+          opacity: 0,
+        }}
         className="w-full max-w-md rounded-md bg-white p-6 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
         onClick={(e) => e.stopPropagation()}
       >
@@ -203,9 +227,9 @@ function Modal({ isModalOpen, setisModalOpen }) {
         >
           Submit
         </Button>
-      </div>
-      <ToastContainer className="w-20" />
-    </div>
+      </motion.div>
+      <ToastContainer />
+    </motion.div>
   );
 }
 
