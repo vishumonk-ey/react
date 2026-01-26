@@ -383,6 +383,7 @@ function Home() {
             }}
             viewport={{
               once: true,
+              amount : 0.2
             }}
           >
             OUR SERVICES
@@ -405,6 +406,7 @@ function Home() {
             }}
             viewport={{
               once: true,
+              amount : 0.2
             }}
           >
             <img
