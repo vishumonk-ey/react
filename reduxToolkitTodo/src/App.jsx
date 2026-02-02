@@ -130,7 +130,7 @@ function App() {
         )}
       </div>
       <div ref={containerRef} className="fixed bottom-4 right-4">
-        <div id="youtube-player" style={{ width: 110, height: 110 }} />
+        <div id="youtube-player" style={{ width: 1, height: 1 }} />
       </div>
     </div>
   );
