@@ -5,12 +5,14 @@ import './App.css'
 import Button from './Button'
 import Card from './Card'
 import CardContainer from './CardContainer'
+import Dashboard from './pages/Dashboard'
+import MotionHooks from './MotionHooks'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <Button/>
+      <MotionHooks/>
     </>
   )
 }
